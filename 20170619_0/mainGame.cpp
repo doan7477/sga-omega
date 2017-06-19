@@ -9,6 +9,7 @@ mainGame::mainGame()
 
 mainGame::~mainGame()
 {
+	//////////////////////////
 }
 
 //초기화 해주는 함수
