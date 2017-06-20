@@ -135,6 +135,9 @@
     <ClInclude Include="sceneManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="guardian.h">
+      <Filter>MainGame\starcraftScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="sceneManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="guardian.cpp">
+      <Filter>MainGame\starcraftScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

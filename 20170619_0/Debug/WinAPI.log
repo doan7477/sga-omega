@@ -1,0 +1,7 @@
+﻿  selectScene.cpp
+c:\users\도안\desktop\20170619_0\selectscene.cpp(68): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(1316): note: 'itoa' 선언을 참조하십시오.
+c:\users\도안\desktop\20170619_0\selectscene.cpp(90): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdlib.h(1316): note: 'itoa' 선언을 참조하십시오.
+  WinAPI.vcxproj -> C:\Users\도안\Desktop\20170619_0\Debug\WinAPI.exe
+  WinAPI.vcxproj -> C:\Users\도안\Desktop\20170619_0\Debug\WinAPI.pdb (Full PDB)

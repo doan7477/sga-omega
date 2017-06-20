@@ -42,24 +42,24 @@ void battle::render(void)
 
 void battle::keyControl(void)
 {
-	if (KEYMANAGER->isStayKeyDown('A'))
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+	{
+		_angle -= 0.06f;
+		if (_angle <= 0) _angle += PI2;
+	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
 		_angle += 0.06f;
 		if (_angle >= PI2) _angle -= PI2;
 	}
 
-	if (KEYMANAGER->isStayKeyDown('D'))
-	{
-		_angle -= 0.06f;
-		if (_angle <= 0) _angle += PI2;	
-	}
-
-	if (KEYMANAGER->isStayKeyDown('W'))
+	if (KEYMANAGER->isStayKeyDown(VK_UP))
 	{
 		_speed += 0.02f;
 	}
 
-	if (KEYMANAGER->isStayKeyDown('S'))
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 	{
 		_speed -= 0.02f;
 	}

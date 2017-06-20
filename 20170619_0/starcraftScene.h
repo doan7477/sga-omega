@@ -8,7 +8,8 @@ class starcraftScene : public gameNode
 {
 private:
 	ship* _battle;
-
+	ship* _guardian;
+	int num;
 
 public:
 	HRESULT init();
