@@ -38,7 +38,7 @@ using namespace OMEGA_UTIL;
 #define WINSTARTX 0				//윈도우 창 시작지점 X좌표
 #define WINSTARTY 50			//윈도우 창 시작지점 Y좌표
 #define WINSIZEX  800			//윈도우 창 가로크기
-#define WINSIZEY  800			//윈도우 창 세로크기
+#define WINSIZEY  600			//윈도우 창 세로크기
 #define WINSTYLE WS_CAPTION | WS_SYSMENU
 
 //랜덤함수 디파인
