@@ -58,6 +58,9 @@
     <Filter Include="MainGame\playerManager">
       <UniqueIdentifier>{f26ac112-bf37-4e9d-ac9c-fb91a8393e18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\scene">
+      <UniqueIdentifier>{ed59c99d-32a0-4a00-bb54-09de4bcd9ef9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -147,6 +150,15 @@
     <ClInclude Include="playerManager.h">
       <Filter>MainGame\playerManager</Filter>
     </ClInclude>
+    <ClInclude Include="lee.h">
+      <Filter>MainGame\playerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="selectScene.h">
+      <Filter>MainGame\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="gameScene.h">
+      <Filter>MainGame\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -220,6 +232,15 @@
     </ClCompile>
     <ClCompile Include="playerManager.cpp">
       <Filter>MainGame\playerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="lee.cpp">
+      <Filter>MainGame\playerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="selectScene.cpp">
+      <Filter>MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="gameScene.cpp">
+      <Filter>MainGame\scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -15,12 +15,15 @@ mainGame::~mainGame()
 HRESULT mainGame::init(void)
 {
 	gameNode::init(true);
+	//배경 이미지
+	IMAGEMANAGER->addImage("백그라운드", "image/한도안/background.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("픽셀라인", "image/한도안/pixelLine,bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 
 	//씬을 등록해둔다
 
-	SCENEMANAGER->addScene("변태영감씬", new playerManager);
+	SCENEMANAGER->addScene("인게임씬", new gameScene);
 	
-	SCENEMANAGER->changeScene("변태영감씬");
+	SCENEMANAGER->changeScene("인게임씬");
 	
 	return S_OK;
 }

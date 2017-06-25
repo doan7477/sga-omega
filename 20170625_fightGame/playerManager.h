@@ -1,7 +1,6 @@
 #pragma once
 #include "gameNode.h"
 #include "progressBar.h"
-#include "dummy.h"
 
 enum PLAYERSTATE
 {
@@ -46,7 +45,6 @@ private:
 
 protected:
 	tagPlayer _player;
-	dummy* _dummy;
 
 public:
 	virtual HRESULT init();

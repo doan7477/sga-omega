@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-#include "playerManager.h"
+#include "gameScene.h"
 
 
 class mainGame : public gameNode

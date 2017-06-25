@@ -86,3 +86,45 @@ bool pixelCollisionManager::playerRWall(image* destImage, float destX, float des
 	return false;
 }
 
+float pixelCollisionManager::getPixelCollisionY(image* destImage, float destX, float destY, image* sourImage)
+{
+	_probeY = destY + destImage->getFrameHeight() / 2;
+
+	for (int i = _probeY - destImage->getFrameHeight() / 2;
+		i < _probeY + destImage->getFrameHeight() / 2; ++i)
+	{
+		_color = GetPixel(sourImage->getMemDC(), destX, i);
+
+		_r = GetRValue(_color);
+		_g = GetGValue(_color);
+		_b = GetBValue(_color);
+
+		if (_r == 255 && _g == 0 && _b == 0)
+		{
+			return destY = i - destImage->getFrameHeight() / 2;
+		}
+	}
+
+	return WINSIZEY - 20;
+}
+float pixelCollisionManager::getPixelCollisionX(image* destImage, float destX, float destY, image* sourImage)
+{
+	_probeX = destX;
+
+	for (int i = _probeX - destImage->getFrameWidth() / 2;
+		i < _probeX + destImage->getFrameWidth() / 2; ++i)
+	{
+		_color = GetPixel(sourImage->getMemDC(), i, destY);
+
+		_r = GetRValue(_color);
+		_g = GetGValue(_color);
+		_b = GetBValue(_color);
+
+		if (_r == 0 && _g == 0 && _b == 255)
+		{
+			return destX = i - destImage->getFrameWidth() / 2;
+		}
+	}
+
+	return destX;
+}
