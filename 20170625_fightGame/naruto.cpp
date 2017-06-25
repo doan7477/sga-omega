@@ -107,6 +107,9 @@ HRESULT naruto::init()
 	_toadTime = 0;
 	_toad = false;
 
+	_throwKnife = new throwKnife;
+	_throwKnife->init(1, WINSIZEX);
+
 	return S_OK;
 }
 
@@ -121,14 +124,15 @@ void naruto::update()
 	move(); 
 	inputKey();
 	command();
+	_throwKnife->update();
 }
 
 void naruto::render()
 {
 	//ÀÌ¹ÌÁö ±×·ÁÁÖ±â
 	_player.img->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.ani);
-
 	if (_toad)_iToad->render(getMemDC(),0,0);
+	_throwKnife->render();
 }
 
 void naruto::move()
@@ -263,15 +267,16 @@ void naruto::inputKey()
 		{
 			if (_player.command == 25)
 			{
-				_player.playerState = PLAYERSTATE_RIGHT_HARD_PUNCH;
-				_player.ani = KEYANIMANAGER->findAnimation("¿À¸¥ÂÊÅõÃ´");
-				_player.ani->start();
 				_commandTime = 0;
 				_player.command = 0;
+				_player.playerState = PLAYERSTATE_RIGHT_SKILL1;
+				_player.ani = KEYANIMANAGER->findAnimation("¿À¸¥ÂÊÅõÃ´");
+				_player.ani->start();
+				_throwKnife->fire(_player.x, _player.y, (int)_player.playerState);
 			}
 			else if (_player.command == 40)
 			{
-				_player.playerState = PLAYERSTATE_RIGHT_HARD_PUNCH;
+				_player.playerState = PLAYERSTATE_RIGHT_SKILL2;
 				_player.ani = KEYANIMANAGER->findAnimation("¿À¸¥ÂÊ¼ÒÈ¯");
 				_player.ani->start();
 				_commandTime = 0;
@@ -290,15 +295,16 @@ void naruto::inputKey()
 			{
 				_commandTime = 0;
 				_player.command = 0;
-				_player.playerState = PLAYERSTATE_LEFT_HARD_PUNCH;
+				_player.playerState = PLAYERSTATE_LEFT_SKILL1;
 				_player.ani = KEYANIMANAGER->findAnimation("¿ŞÂÊÅõÃ´");
 				_player.ani->start();
+				_throwKnife->fire(_player.x, _player.y, (int)_player.playerState);
 			}
 			else if (_player.command == 40)
 			{
 				_commandTime = 0;
 				_player.command = 0;
-				_player.playerState = PLAYERSTATE_LEFT_HARD_PUNCH;
+				_player.playerState = PLAYERSTATE_LEFT_SKILL2;
 				_player.ani = KEYANIMANAGER->findAnimation("¿ŞÂÊ¼ÒÈ¯");
 				_player.ani->start();
 			}

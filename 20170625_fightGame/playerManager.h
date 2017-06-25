@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "progressBar.h"
+#include "bullets.h"
 
 enum PLAYERSTATE
 {
@@ -66,6 +67,7 @@ class playerManager : public gameNode
 private:
 
 protected:
+	throwKnife* _throwKnife;
 	tagPlayer _player;
 	//커맨드입력 관련 변수
 	int _commandCount;
