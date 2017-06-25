@@ -71,7 +71,7 @@ HRESULT sasuke::init()
 	_player.speed = 4.0f;
 	_player.playerState = PLAYERSTATE_RIGHT_STOP;
 	_player.x = 200;
-	_player.y = WINSIZEY - 60;
+	_player.y = WINSIZEY - 50;
 	_player.rc = RectMakeCenter(_player.x, _player.y, 50, 50);
 	_player.attackRange= RectMakeCenter(_hitzoneX, _hitzoneY, 10, 10);
 	_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");
@@ -94,6 +94,7 @@ void sasuke::update()
 	inputKey();
 	command();
 	move();
+	playerManager::pixelCollision();
 }
 
 void sasuke::render()
@@ -274,6 +275,7 @@ void sasuke::inputKey()
 	//공격 커맨드 관련
 	if (KEYMANAGER->isOnceKeyDown('Q'))
 	{
+		playerManager::attack();
 		_commandCount += 32;
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
 		{
@@ -290,6 +292,7 @@ void sasuke::inputKey()
 	}
 	if (KEYMANAGER->isOnceKeyDown('W'))
 	{
+		playerManager::attack();
 		_commandCount += 64;
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
 		{
@@ -306,6 +309,7 @@ void sasuke::inputKey()
 	}
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
+		playerManager::attack();
 		_commandCount += 128;
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
 		{
@@ -322,6 +326,7 @@ void sasuke::inputKey()
 	}
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
+		playerManager::attack();
 		_commandCount += 256;
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
 		{
@@ -401,6 +406,7 @@ void sasuke::rightattack(void* obj)
 
 	s->setPlayerState(PLAYERSTATE_RIGHT_STOP);
 	s->setPlayerMotion(KEYANIMANAGER->findAnimation("오른쪽정지"));
+	s->_player.attackRange = RectMake(0, 0, 0, 0);
 	s->getPlayerMotion()->start();
 }
 
@@ -410,5 +416,6 @@ void sasuke::leftattack(void* obj)
 
 	s->setPlayerState(PLAYERSTATE_LEFT_STOP);
 	s->setPlayerMotion(KEYANIMANAGER->findAnimation("왼쪽정지"));
+	s->_player.attackRange = RectMake(0, 0, 0, 0);
 	s->getPlayerMotion()->start();
 }

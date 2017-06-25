@@ -136,6 +136,7 @@ void lee::update()
 	}
 	_player.hpBar->update();
 	command();
+	playerManager::pixelCollision();
 }
 void lee::render()
 {

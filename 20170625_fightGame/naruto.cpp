@@ -67,7 +67,7 @@ HRESULT naruto::init()
 	int rightThrow[] = { 32,33,34 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽투척", "나루토", rightThrow, 3, 5, false, rightAttack, this);
 	int leftThrow[] = { 93,94,95 };
-	KEYANIMANAGER->addArrayFrameAnimation("왼쪽투척", "나루토", leftThrow, 3, 5, false,leftAttack, this);
+	KEYANIMANAGER->addArrayFrameAnimation("왼쪽투척", "나루토", leftThrow, 3, 5, false, leftAttack, this);
 
 	//커맨드 3 독두꺼비 소환
 	int rightToad[] = { 35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50 };
@@ -121,7 +121,7 @@ void naruto::release()
 void naruto::update()
 {
 	KEYANIMANAGER->update();
-	move(); 
+	move();
 	inputKey();
 	command();
 	_throwKnife->update();
@@ -131,7 +131,7 @@ void naruto::render()
 {
 	//이미지 그려주기
 	_player.img->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.ani);
-	if (_toad)_iToad->render(getMemDC(),0,0);
+	if (_toad)_iToad->render(getMemDC(), 0, 0);
 	_throwKnife->render();
 }
 
@@ -158,7 +158,7 @@ void naruto::move()
 
 void naruto::attack()
 {
-	
+
 }
 
 void naruto::inputKey()
@@ -222,6 +222,7 @@ void naruto::inputKey()
 	////////////////////////////////////////////////////약손공격
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
+		playerManager::attack();
 		_commandTime = 0;
 		_player.command += 4;
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
@@ -260,6 +261,7 @@ void naruto::inputKey()
 	////////////////////////////////////////////////강손공격
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
+		playerManager::attack();
 		_commandTime = 0;
 		_player.command += 8;
 
@@ -319,6 +321,7 @@ void naruto::inputKey()
 	////////////////////////////////////////////////////////////////////////약발공격
 	if (KEYMANAGER->isOnceKeyDown('Q'))
 	{
+		playerManager::attack();
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_SOFT_KICK;
@@ -335,6 +338,7 @@ void naruto::inputKey()
 	////////////////////////////////////////////////////////////////////////강발공격
 	if (KEYMANAGER->isOnceKeyDown('W'))
 	{
+		playerManager::attack();
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_HARD_KICK;
@@ -386,6 +390,7 @@ void naruto::setPlayerAni()
 {
 
 }
+
 void naruto::command()
 {
 	if (_player.command != 0)_commandTime++;
@@ -405,8 +410,9 @@ void naruto::command()
 void naruto::rightAttack(void* obj)
 {
 	naruto* n = (naruto*)obj;
-	if(n->getPlayerMotion()== KEYANIMANAGER->findAnimation("오른쪽소환"))n->setToad(true);
+	if (n->getPlayerMotion() == KEYANIMANAGER->findAnimation("오른쪽소환"))n->setToad(true);
 	n->setPlayerState(PLAYERSTATE_RIGHT_STOP);
+	n->_player.attackRange = RectMake(0, 0, 0, 0);
 	n->setPlayerMotion(KEYANIMANAGER->findAnimation("오른쪽정지"));
 	n->getPlayerMotion()->start();
 }
@@ -416,6 +422,7 @@ void naruto::leftAttack(void* obj)
 	naruto* n = (naruto*)obj;
 	if (n->getPlayerMotion() == KEYANIMANAGER->findAnimation("왼쪽소환"))n->setToad(true);
 	n->setPlayerState(PLAYERSTATE_LEFT_STOP);
+	n->_player.attackRange = RectMake(0, 0, 0, 0);
 	n->setPlayerMotion(KEYANIMANAGER->findAnimation("왼쪽정지"));
 	n->getPlayerMotion()->start();
 }

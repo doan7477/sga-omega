@@ -96,6 +96,7 @@ public:
 	virtual void rightAttack(void* obj);
 	virtual void leftAttack(void* obj);
 
+	throwKnife* getKnife() { return _throwKnife; }
 	tagPlayer getPlayerStruct() { return _player; }
 	RECT getPlayerAttackRange() { return _player.attackRange; }
 

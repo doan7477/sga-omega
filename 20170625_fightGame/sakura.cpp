@@ -102,12 +102,13 @@ void sakura::update()
 	KEYANIMANAGER->update();
 	inputKey();
 	move();
+	playerManager::pixelCollision();
 }
 
 void sakura::render()
 {
-	Rectangle(getMemDC(), _player.attackRange.left, _player.attackRange.top, _player.attackRange.right, _player.attackRange.bottom);
-	Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	//Rectangle(getMemDC(), _player.attackRange.left, _player.attackRange.top, _player.attackRange.right, _player.attackRange.bottom);
+	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	_player.img->aniRender(getMemDC(), _player.rc.left - 25, _player.rc.top - 50, _player.ani);
 }
 
@@ -296,7 +297,7 @@ void sakura::rightFire(void* obj)
 	sakura* s = (sakura*)obj;
 	s->setPlayerState(PLAYERSTATE_RIGHT_STOP);
 	s->setPlayerMotion(KEYANIMANAGER->findAnimation("¿ìÁ¤Áö"));
-	s->getPlayerAttackRange() = RectMake(0, 0, 0, 0);
+	s->_player.attackRange = RectMake(0, 0, 0, 0);
 	s->getPlayerMotion()->start();
 }
 
@@ -305,6 +306,6 @@ void sakura::leftFire(void* obj)
 	sakura* s = (sakura*)obj;
 	s->setPlayerState(PLAYERSTATE_LEFT_STOP);
 	s->setPlayerMotion(KEYANIMANAGER->findAnimation("¿ŞÁ¤Áö"));
-	s->getPlayerAttackRange() = RectMake(0, 0, 0, 0);
+	s->_player.attackRange = RectMake(0, 0, 0, 0);
 	s->getPlayerMotion()->start();
 }

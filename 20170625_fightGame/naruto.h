@@ -1,6 +1,7 @@
 #pragma once
 #include "playerManager.h"
-class naruto : public playerManager
+class naruto :
+	public playerManager
 {
 protected:
 	int _commandTime;

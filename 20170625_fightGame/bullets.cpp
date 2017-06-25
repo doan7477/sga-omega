@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "bullets.h"
 
-throwKnife::throwKnife(){}
-throwKnife::~throwKnife(){}
+throwKnife::throwKnife() {}
+throwKnife::~throwKnife() {}
 
 HRESULT throwKnife::init(int bulletMax, int range)
 {
@@ -15,12 +15,12 @@ void throwKnife::release(void)
 {
 	_vBullet.clear();
 }
-void throwKnife::update(void) 
+void throwKnife::update(void)
 {
 	frameWork();
 	move();
 }
-void throwKnife::render(void) 
+void throwKnife::render(void)
 {
 	draw();
 }

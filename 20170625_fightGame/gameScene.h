@@ -17,7 +17,6 @@ private:
 	playerManager* _player;
 	dummy* _dummy;
 
-	int _camX, _camY;
 
 public:
 	HRESULT init();
