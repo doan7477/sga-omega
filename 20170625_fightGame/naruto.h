@@ -3,6 +3,12 @@
 class naruto :
 	public playerManager
 {
+protected:
+	int _commandTime;
+	int _toadTime;
+	image* _iToad;
+	bool _toad;
+
 public:
 	HRESULT init();
 	void release();
@@ -23,6 +29,8 @@ public:
 
 	animation* getPlayerMotion(void) { return _player.ani; }
 	void setPlayerMotion(animation* ani) { _player.ani = ani; }
+
+	void setToad(bool toad) { _toad = toad; }
 
 	naruto();
 	~naruto();

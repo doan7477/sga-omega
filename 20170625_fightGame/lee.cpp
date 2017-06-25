@@ -183,6 +183,7 @@ void lee::inputKey()
 		_player.ani = KEYANIMANAGER->findAnimation("왼쪽정지");
 		_player.ani->start();
 	}
+
 	//점프
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
