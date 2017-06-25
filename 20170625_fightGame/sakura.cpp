@@ -18,9 +18,9 @@ HRESULT sakura::init()
 	
 	//이동
 	int leftMove[] = { 0,1,2,3 };
-	KEYANIMANAGER->addArrayFrameAnimation("좌이동", "사쿠라", leftMove, 4, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("좌이동", "사쿠라", leftMove, 4, 6, true);
 	int rightMove[] = { 6,7,8,9 };
-	KEYANIMANAGER->addArrayFrameAnimation("우이동", "사쿠라", rightMove, 4, 10, true);
+	KEYANIMANAGER->addArrayFrameAnimation("우이동", "사쿠라", rightMove, 4, 6, true);
 
 	//숙이기
 	int leftDuck[] = { 12,13,14 };

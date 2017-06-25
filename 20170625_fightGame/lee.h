@@ -4,6 +4,11 @@
 
 class lee : public playerManager
 {
+private:
+	bool _commandStart;
+	int	_commandCount;
+	int _commandTimer;
+
 public:
 	HRESULT init();
 	virtual void release();
@@ -19,6 +24,9 @@ public:
 
 	static void rightFire(void* obj);
 	static void leftFire(void* obj);
+
+	static void rightFinish(void* obj);
+	static void leftFinish(void* obj);
 
 	PLAYERSTATE getPlayerState(void) { return _player.playerState; }
 	void setPlayerState(PLAYERSTATE playerState) { _player.playerState = playerState; }

@@ -37,6 +37,9 @@ HRESULT gameScene::init()
 		_player->init();
 	}
 
+	_camX = 0;
+	_camY = 300;
+
 	_dummy = new dummy;
 	_dummy->init();
 
@@ -58,8 +61,8 @@ void gameScene::update()
 
 void gameScene::render()
 {
-	IMAGEMANAGER->render("픽셀라인", getMemDC(), 0, 0);
-	//IMAGEMANAGER->render("백그라운드", getMemDC(), 0, 0);
+	IMAGEMANAGER->findImage("픽셀라인")->render(getMemDC(), 0, 0);
+	//IMAGEMANAGER->render("백그라운드", getMemDC(), -_camX, -_camY);
 
 	_player->render();
 	_dummy->render();
@@ -70,8 +73,18 @@ void gameScene::collision()
 	RECT temp;
 	if (IntersectRect(&temp, &_player->getPlayerAttackRange(), &_dummy->getRect()))
 	{
-		_dummy->setDummyState(DUMMYSTATE_LEFT_HIT);
-		_dummy->setDummyAni(KEYANIMANAGER->findAnimation("더미왼쪽맞음"));
-		_dummy->getAni()->start();
+		if (_player->getPlayerStruct().playerState == PLAYERSTATE_RIGHT_SOFT_PUNCH || _player->getPlayerStruct().playerState == PLAYERSTATE_RIGHT_HARD_PUNCH ||
+			_player->getPlayerStruct().playerState == PLAYERSTATE_RIGHT_SOFT_KICK || _player->getPlayerStruct().playerState == PLAYERSTATE_RIGHT_HARD_KICK)
+		{
+			_dummy->hitDamage(5.0f);
+			_dummy->setDummyState(DUMMYSTATE_LEFT_HIT);
+			_dummy->setDummyAni(KEYANIMANAGER->findAnimation("더미왼쪽맞음"));
+			_dummy->getAni()->start();
+		}
 	}
+}
+
+void gameScene::dummyState()
+{
+
 }

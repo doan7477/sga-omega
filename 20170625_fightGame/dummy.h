@@ -28,12 +28,15 @@ public:
 	virtual void release();
 	virtual void render();
 
+	void hitDamage(float dam);
+
 	static void leftHit(void* obj);
 	static void rightHit(void* obj);
 
 	RECT getRect() { return hitRc; }
 	animation* getAni() { return ani; }
 	DUMMYSTATE getState() { return dummystate; }
+	POINT getCenter() { return PointMake(x, y); }
 
 	void setDummyState(DUMMYSTATE ds) { dummystate = ds; ani->start(); }
 	void setDummyAni(animation* an) { ani = an; }

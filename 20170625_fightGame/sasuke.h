@@ -4,10 +4,7 @@
 class sasuke : public playerManager
 {
 private:
-	int _hitx, _hity;
-	int _commandClick;
-	int	_commandCount;
-	int _commandTimer;
+	int _chidoriCount;
 
 public:
 	virtual HRESULT init();

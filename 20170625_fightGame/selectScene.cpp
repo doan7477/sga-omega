@@ -45,12 +45,12 @@ HRESULT selectScene::init()
 
 	for (int i = 0;i < 4;i++)
 	{
-		_selectRc[i] = RectMake(10 + i * 200, WINSIZEY / 2 + 100, 179, 185);
+		_selectRc[i] = RectMake(50 + i * 180, WINSIZEY / 2 + 50, 179, 185);
 	}
 
 	for (int i = 0;i < 2;i++)
 	{
-		_showRc[i] = RectMake(50 + i * 350, 50, 310, 486);
+		_showRc[i] = RectMake(50 + i * 150, 50, 310, 486);
 	}
 
 	return S_OK;
@@ -77,9 +77,10 @@ void selectScene::update()
 void selectScene::render() 
 {
 	IMAGEMANAGER->findImage("선택배경")->alphaRender(getMemDC(), 0, 0, _alpha);
-	IMAGEMANAGER->findImage("UI")->alphaRender(getMemDC(), WINSIZEX / 2 - 100, 200, _alpha);
+	IMAGEMANAGER->findImage("UI")->alphaRender(getMemDC(), WINSIZEX / 2 - 100, 100, _alpha);
 	for (int j = 0;j < 4;j++)
 	{
+		//Rectangle(getMemDC(), _showRc[0].left, _showRc[0].top, _showRc[0].right, _showRc[0].bottom);
 		IMAGEMANAGER->findImage(_showName[_nowCharacter])->alphaRender(getMemDC(), _showRc[0].left, _showRc[0].top, _alpha);
 	}
 	for (int i = 0;i < 4;i++)

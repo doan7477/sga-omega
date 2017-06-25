@@ -17,6 +17,8 @@ private:
 	playerManager* _player;
 	dummy* _dummy;
 
+	int _camX, _camY;
+
 public:
 	HRESULT init();
 	void release();
@@ -24,6 +26,7 @@ public:
 	void render();
 
 	void collision();
+	void dummyState();
 
 	gameScene();
 	~gameScene();

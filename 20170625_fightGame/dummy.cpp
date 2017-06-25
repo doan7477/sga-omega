@@ -26,8 +26,14 @@ HRESULT dummy::init()
 	int dummyLeftStop[] = { 0, 1, 2, 3, 4, 5 };
 	KEYANIMANAGER->addArrayFrameAnimation("더미왼쪽정지", "더미", dummyLeftStop, 6, 10, true);
 
-	int dummyLeftHit[] = { 7, 8, 9 };
-	KEYANIMANAGER->addArrayFrameAnimation("더미왼쪽맞음", "더미", dummyLeftHit, 3, 10, false, leftHit, this);
+	int dummyLeftHit[] = { 6, 7, 8, 9 };
+	KEYANIMANAGER->addArrayFrameAnimation("더미왼쪽맞음", "더미", dummyLeftHit, 3, 6, false, leftHit, this);
+
+	int dummyRightStop[] = { 11,12,13,14,15,16 };
+	KEYANIMANAGER->addArrayFrameAnimation("더미오른쪽정지", "더미", dummyRightStop, 6, 10, true);
+
+	int dummyRightHit[] = { 17,18,19,20 };
+	KEYANIMANAGER->addArrayFrameAnimation("더미오른쪽맞음", "더미", dummyRightHit, 4, 6, false, rightHit, this);
 
 	ani = KEYANIMANAGER->findAnimation("더미왼쪽정지");
 	ani->start();
@@ -45,6 +51,7 @@ void dummy::update()
 	KEYANIMANAGER->update();
 	hitRc = RectMakeCenter(x, y, 25, 50);
 	hpBar->update();
+	hpBar->setGauge(currentHp, maxHp);
 }
 
 void dummy::release()
@@ -67,7 +74,6 @@ void dummy::leftHit(void* obj)
 	dummy* d = (dummy*)obj;
 	d->setDummyState(DUMMYSTATE_LEFT_STOP);
 	d->setDummyAni(KEYANIMANAGER->findAnimation("더미왼쪽정지"));
-	d->getAni()->start();
 }
 
 void dummy::rightHit(void* obj)
@@ -75,4 +81,9 @@ void dummy::rightHit(void* obj)
 	dummy* d = (dummy*)obj;
 	d->setDummyState(DUMMYSTATE_RIGHT_STOP);
 	d->setDummyAni(KEYANIMANAGER->findAnimation("더미왼쪽정지"));
+}
+
+void dummy::hitDamage(float dam)
+{
+	currentHp -= dam;
 }
