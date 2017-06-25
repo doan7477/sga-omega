@@ -10,7 +10,7 @@ mainGame::mainGame()
 mainGame::~mainGame()
 {
 }
-
+//확인용 주석
 //초기화 해주는 함수
 HRESULT mainGame::init(void)
 {
