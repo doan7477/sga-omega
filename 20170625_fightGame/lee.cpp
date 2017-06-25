@@ -21,41 +21,49 @@ HRESULT lee::init()
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽이동", "록리", rightMove, 6, 6, true);
 	int leftMove[] = { 83,84,85,86,87,88 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽이동", "록리", leftMove, 6, 6, true);
+
 	//뛰기
 	int rightRun[] = { 6,7,8,9,10,11 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽뛰기", "록리", rightRun, 6, 6, true);
 	int leftRun[] = { 56,57,58,59,60,61 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽뛰기", "록리", leftRun, 6, 6, true);
+
 	//스톱
 	int rightStop[] = { 0,1,2,3,4,5 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽정지", "록리", rightStop, 6, 6, true);
 	int leftStop[] = { 50,51,52,53,54,55 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽정지", "록리", leftStop, 6, 6, true);
+
 	//숙이기
 	int rightDuck[] = { 12,13,14,15,16 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽숙이기", "록리", rightDuck, 5, 10, false);
 	int leftDuck[] = { 62,63,64,65,66 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽숙이기", "록리", leftDuck, 5, 10, false);
+
 	//점프
 	int rightJump[] = { 17,18,19 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽점프", "록리", rightJump, 3, 10, false);
 	int leftJump[] = { 67,68,69 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽점프", "록리", leftJump, 3, 10, false);
+
 	//약손
 	int rightSoftPuch[] = { 20,21,22 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽약손", "록리", rightSoftPuch, 3, 6, false, rightFire, this);
 	int leftSoftPuch[] = { 70,71,72 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽약손", "록리", leftSoftPuch, 3, 6, false, leftFire, this);
+
 	//강손
 	int rightHardPuch[] = { 23,24,25,26 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽강손", "록리", rightHardPuch, 4, 6, false, rightFire, this);
 	int leftHardPuch[] = { 73,74,75,76 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽강손", "록리", leftHardPuch, 4, 6, false, leftFire, this);
+
 	//약발
 	int rightSoftKick[] = { 27,28,29,30,31,32 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽약발", "록리", rightSoftKick, 6, 6, false, rightFire, this);
 	int leftSoftKick[] = { 77,78,79,80,81,82 };
 	KEYANIMANAGER->addArrayFrameAnimation("왼쪽약발", "록리", leftSoftKick, 6, 6, false, leftFire, this);
+
 	//강발
 	int rightHardKick[] = { 42,43,44,45,46,47,48,49 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽강발", "록리", rightHardKick, 8, 6, false, rightFire, this);

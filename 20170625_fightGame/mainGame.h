@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "gameScene.h"
+#include "selectScene.h"
 
 
 class mainGame : public gameNode

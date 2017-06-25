@@ -7,7 +7,10 @@
 class gameScene : public gameNode
 {
 private:
-	lee* _player;
+	vector<string> vStr;
+	int _selectedChar;
+
+	playerManager* _player;
 	dummy* _dummy;
 
 public:

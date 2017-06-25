@@ -13,8 +13,29 @@ gameScene::~gameScene()
 
 HRESULT gameScene::init()
 {
-	_player = new lee;
-	_player->init();
+	vStr = TXTDATA->txtLoad("캐릭터선택.txt");
+	_selectedChar = (atoi(vStr[0].c_str()));
+
+	if (_selectedChar == 1)
+	{
+		_player = new lee;
+		_player->init();
+	}
+	if (_selectedChar == 2)
+	{
+		_player = new lee;
+		_player->init();
+	}
+	if (_selectedChar == 3)
+	{
+		_player = new lee;
+		_player->init();
+	}
+	if (_selectedChar == 4)
+	{
+		_player = new lee;
+		_player->init();
+	}
 
 	_dummy = new dummy;
 	_dummy->init();

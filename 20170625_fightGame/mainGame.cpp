@@ -10,7 +10,7 @@ mainGame::mainGame()
 mainGame::~mainGame()
 {
 }
-//확인용 주석
+
 //초기화 해주는 함수
 HRESULT mainGame::init(void)
 {
@@ -22,8 +22,9 @@ HRESULT mainGame::init(void)
 	//씬을 등록해둔다
 
 	SCENEMANAGER->addScene("인게임씬", new gameScene);
+	SCENEMANAGER->addScene("선택씬", new selectScene);
 	
-	SCENEMANAGER->changeScene("인게임씬");
+	SCENEMANAGER->changeScene("선택씬");
 	
 	return S_OK;
 }
