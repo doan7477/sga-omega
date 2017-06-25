@@ -66,8 +66,8 @@ void throwKnife::draw(void)
 {
 	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end(); ++_viBullet)
 	{
-		if (_viBullet->_isLeft % 2 == 0)_viBullet->bulletImage->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, 0, 1);
-		if (_viBullet->_isLeft % 2 == 1)_viBullet->bulletImage->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, 0, 0);
+		if (_viBullet->_isLeft % 2 == 0)_viBullet->bulletImage->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, _viBullet->_currentX, 1);
+		if (_viBullet->_isLeft % 2 == 1)_viBullet->bulletImage->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, _viBullet->_currentX, 0);
 	}
 }
 
