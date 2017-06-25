@@ -24,6 +24,8 @@ HRESULT playerManager::init()
 	int rightStop[] = { 0 };
 	KEYANIMANAGER->addArrayFrameAnimation("오른쪽정지", "이동", rightStop, 1, 10, true);
 
+	*/
+
 	_player.currentHp = _player.maxHp = 100.0f;
 	_player.gravity = 5.0f;
 	_player.speed = 4.0f;
@@ -31,7 +33,8 @@ HRESULT playerManager::init()
 	_player.x = 200;
 	_player.y = WINSIZEY - 50;
 	_player.rc = RectMakeCenter(_player.x, _player.y, 50, 50);
-	_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");*/
+	_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");
+	_player.isJump = false;
 
 
 	//플레이어 애니메이션 함수에 애니메이션 추가 후 이닛에 불러오기
@@ -46,7 +49,7 @@ void playerManager::release()
 
 void playerManager::update()
 {
-
+	pixelCollision();
 	/*KEYANIMANAGER->update();
 	inputKey();
 	move();*/
@@ -56,11 +59,6 @@ void playerManager::render()
 {
 	//_player.img->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.ani);
 	//_player.hpBar->render();
-}
-
-void playerManager::attack()  
-{
-
 }
 
 void playerManager::move()	  
@@ -109,11 +107,45 @@ void playerManager::inputKey()
 	}
 }
 
+void playerManager::attack()
+{
+	if (_player.playerState == PLAYERSTATE_LEFT_STOP || _player.playerState == PLAYERSTATE_LEFT_MOVE)
+	{
+		_player.attackRange = RectMake(_player.x - 20, _player.y - 10, 20, 20);
+	}
+	if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE)
+	{
+		_player.attackRange = RectMake(_player.x + 40, _player.y - 10, 20, 20);
+	}
+}
+
 void playerManager::setPlayerAni()
 {
 }
 
 void playerManager::command()
+{
+
+}
+
+void playerManager::pixelCollision()
+{
+	if (!PIXELMANAGER->playerLWall(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("픽셀라인")))
+	{
+
+	}
+	if (PIXELMANAGER->getPixelCollisionY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("픽셀라인")))
+	{
+		_player.isJump = false;
+	}
+}
+
+void playerManager::rightAttack(void* obj)
+{
+
+}
+
+void playerManager::leftAttack(void* obj)
 {
 
 }

@@ -90,7 +90,7 @@ float pixelCollisionManager::getPixelCollisionY(image* destImage, float destX, f
 {
 	_probeY = destY + destImage->getFrameHeight() / 2;
 
-	for (int i = _probeY - destImage->getFrameHeight() / 2;
+	for (int i = _probeY;
 		i < _probeY + destImage->getFrameHeight() / 2; ++i)
 	{
 		_color = GetPixel(sourImage->getMemDC(), destX, i);

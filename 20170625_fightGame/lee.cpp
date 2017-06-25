@@ -72,7 +72,7 @@ HRESULT lee::init()
 
 
 	_player.currentHp = _player.maxHp = 100.0f;
-	_player.gravity = 5.0f;
+	_player.gravity = 4.0f;
 	_player.speed = 3.0f;
 	_player.playerState = PLAYERSTATE_RIGHT_STOP;
 	_player.x = 200;
@@ -92,16 +92,23 @@ void lee::update()
 	KEYANIMANAGER->update();
 	inputKey();
 	move();
+	if (_player.isJump)
+	{
+		_player.gravity -= 0.1f;
+	}
 }
 void lee::render()
 {
+	Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	_player.img->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.ani);
+	Rectangle(getMemDC(), _player.attackRange.left, _player.attackRange.top, _player.attackRange.right, _player.attackRange.bottom);
 }
 
 void lee::attack()
 {
-
+	
 }
+
 void lee::move()
 {
 	_player.rc = RectMakeCenter(_player.x, _player.y, 50, 50);
@@ -119,6 +126,14 @@ void lee::move()
 		break;
 	case PLAYERSTATE_LEFT_RUN:
 		_player.x -= 4.0f;
+		break;
+	case PLAYERSTATE_RIGHT_JUMP:
+		_player.x += 2.0f;
+		_player.y -= _player.gravity;
+		break;
+	case PLAYERSTATE_LEFT_JUMP:
+		_player.x -= 2.0f;
+		_player.y -= _player.gravity;
 		break;
 	case PLAYERSTATE_RIGHT_HARD_KICK:
 		_player.x += 0.2f;
@@ -164,8 +179,10 @@ void lee::inputKey()
 		_player.ani->start();
 	}
 	//점프
-	if (KEYMANAGER->isStayKeyDown(VK_UP))
+	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{
+		_player.gravity = 4.0f;
+		_player.isJump = true;
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_RUN || _player.playerState == PLAYERSTATE_RIGHT_MOVE)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_JUMP;
@@ -179,7 +196,7 @@ void lee::inputKey()
 			_player.ani->start();
 		}
 	}
-	if (KEYMANAGER->isOnceKeyUp(VK_UP))
+	/*if (KEYMANAGER->isOnceKeyUp(VK_UP))
 	{
 		if (_player.playerState == PLAYERSTATE_RIGHT_JUMP)
 		{
@@ -193,7 +210,7 @@ void lee::inputKey()
 			_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");
 			_player.ani->start();
 		}
-	}
+	}*/
 	//숙이기
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 	{
@@ -228,6 +245,7 @@ void lee::inputKey()
 	//약손
 	if (KEYMANAGER->isOnceKeyDown('Q'))
 	{
+		playerManager::attack();
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_RUN || _player.playerState == PLAYERSTATE_RIGHT_MOVE)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_SOFT_PUNCH;
@@ -244,6 +262,7 @@ void lee::inputKey()
 	//강손
 	if (KEYMANAGER->isOnceKeyDown('W'))
 	{
+		playerManager::attack();
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_RUN || _player.playerState == PLAYERSTATE_RIGHT_MOVE)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_HARD_PUNCH;
@@ -260,6 +279,7 @@ void lee::inputKey()
 	//약발
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
+		playerManager::attack();
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_RUN || _player.playerState == PLAYERSTATE_RIGHT_MOVE)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_SOFT_KICK;
@@ -276,6 +296,7 @@ void lee::inputKey()
 	//강발
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
+		playerManager::attack();
 		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_RUN || _player.playerState == PLAYERSTATE_RIGHT_MOVE)
 		{
 			_player.playerState = PLAYERSTATE_RIGHT_HARD_KICK;
@@ -289,12 +310,13 @@ void lee::inputKey()
 			_player.ani->start();
 		}
 	}
-
 }
+
 void lee::setPlayerAni()
 {
 
 }
+
 void lee::command()
 {
 
@@ -305,6 +327,7 @@ void lee::rightFire(void* obj)
 	lee* l = (lee*)obj;
 	l->setPlayerState(PLAYERSTATE_RIGHT_STOP);
 	l->setPlayerMotion(KEYANIMANAGER->findAnimation("오른쪽정지"));
+	l->_player.attackRange = RectMake(0, 0, 0, 0);
 	l->getPlayerMotion()->start();
 }
 
@@ -313,5 +336,18 @@ void lee::leftFire(void* obj)
 	lee* l = (lee*)obj;
 	l->setPlayerState(PLAYERSTATE_LEFT_STOP);
 	l->setPlayerMotion(KEYANIMANAGER->findAnimation("왼쪽정지"));
+	l->_player.attackRange = RectMake(0, 0, 0, 0);
 	l->getPlayerMotion()->start();
+}
+
+void lee::pixelCollision()
+{
+	if (!PIXELMANAGER->playerLWall(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("픽셀라인")))
+	{
+
+	}
+	if (PIXELMANAGER->getPixelCollisionY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("픽셀라인")))
+	{
+		_player.isJump = false;
+	}
 }

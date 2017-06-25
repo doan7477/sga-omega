@@ -27,6 +27,7 @@ enum PLAYERSTATE
 struct tagPlayer
 {
 	RECT rc;
+	RECT attackRange;
 	PLAYERSTATE playerState;
 	image* img;
 	progressBar* hpBar;
@@ -37,6 +38,7 @@ struct tagPlayer
 	float gravity;
 	float timer;
 	int command;
+	bool isJump;
 };
 
 class playerManager : public gameNode
@@ -52,11 +54,15 @@ public:
 	virtual void update();
 	virtual void render();
 	
-	virtual void attack();
 	virtual void move();
 	virtual void inputKey();
 	virtual void setPlayerAni();
 	virtual void command();
+	virtual void pixelCollision();
+	virtual void attack();
+
+	virtual void rightAttack(void* obj);
+	virtual void leftAttack(void* obj);
 
 	tagPlayer getPlayerStruct() { return _player; }
 

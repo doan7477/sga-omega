@@ -15,6 +15,7 @@ public:
 	virtual void inputKey();
 	virtual void setPlayerAni();
 	virtual void command();
+	virtual void pixelCollision();
 
 	static void rightFire(void* obj);
 	static void leftFire(void* obj);

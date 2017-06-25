@@ -27,7 +27,7 @@ HRESULT selectScene::init()
 	IMAGEMANAGER->addImage("사스케뚝배기", "image/선택씬/사스뚝배기.bmp", 179, 185, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("사쿠라뚝배기", "image/선택씬/사쿠라 둑배기.bmp", 179, 185, true, RGB(255, 0, 255));
 
-	SOUNDMANAGER->play("선택", 0.1f);
+	SOUNDMANAGER->play("선택", 0.01f);
 
 	_characterName[0] = "나루토뚝배기";
 	_characterName[1] = "록리뚝배기";
@@ -69,7 +69,7 @@ void selectScene::update()
 	if (_alpha < 10)
 	{
 		SOUNDMANAGER->stop("선택");
-		SOUNDMANAGER->play("게임씬", 0.1f);
+		SOUNDMANAGER->play("게임씬", 0.01f);
 		SCENEMANAGER->changeScene("인게임씬");
 	}
 }
