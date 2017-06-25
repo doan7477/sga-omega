@@ -3,6 +3,8 @@
 #include "playerManager.h"
 #include "lee.h"
 #include "sasuke.h"
+#include "naruto.h"
+#include "sakura.h"
 #include "dummy.h"
 
 
@@ -20,6 +22,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void collision();
 
 	gameScene();
 	~gameScene();

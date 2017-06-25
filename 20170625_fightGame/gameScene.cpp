@@ -18,7 +18,7 @@ HRESULT gameScene::init()
 
 	if (_selectedChar == 1)
 	{
-		_player = new lee;
+		_player = new naruto;
 		_player->init();
 	}
 	if (_selectedChar == 2)
@@ -33,7 +33,7 @@ HRESULT gameScene::init()
 	}
 	if (_selectedChar == 4)
 	{
-		_player = new lee;
+		_player = new sakura;
 		_player->init();
 	}
 
@@ -42,16 +42,20 @@ HRESULT gameScene::init()
 
 	return S_OK;
 }
+
 void gameScene::release()
 {
 
 }
+
 void gameScene::update()
 {
 	SOUNDMANAGER->update();
 	_player->update();
 	_dummy->update();
+	collision();
 }
+
 void gameScene::render()
 {
 	IMAGEMANAGER->render("ÇÈ¼¿¶óÀÎ", getMemDC(), 0, 0);
@@ -59,4 +63,13 @@ void gameScene::render()
 
 	_player->render();
 	_dummy->render();
+}
+
+void gameScene::collision()
+{
+	RECT temp;
+	if (IntersectRect(&temp, &_player->getPlayerAttackRange(), &_dummy->getRect()))
+	{
+		_dummy->setDummyState(DUMMYSTATE_LEFT_HIT);
+	}
 }

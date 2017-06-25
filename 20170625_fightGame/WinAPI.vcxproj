@@ -93,11 +93,13 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="lee.h" />
     <ClInclude Include="mainGame.h" />
+    <ClInclude Include="naruto.h" />
     <ClInclude Include="pixelCollisionManager.h" />
     <ClInclude Include="playerManager.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="sakura.h" />
     <ClInclude Include="sasuke.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="selectScene.h" />
@@ -126,9 +128,11 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="lee.cpp" />
     <ClCompile Include="mainGame.cpp" />
+    <ClCompile Include="naruto.cpp" />
     <ClCompile Include="pixelCollisionManager.cpp" />
     <ClCompile Include="playerManager.cpp" />
     <ClCompile Include="progressBar.cpp" />
+    <ClCompile Include="sakura.cpp" />
     <ClCompile Include="sasuke.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="selectScene.cpp" />

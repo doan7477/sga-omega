@@ -162,6 +162,12 @@
     <ClInclude Include="sasuke.h">
       <Filter>MainGame\playerManager</Filter>
     </ClInclude>
+    <ClInclude Include="sakura.h">
+      <Filter>MainGame\playerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="naruto.h">
+      <Filter>MainGame\playerManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -246,6 +252,12 @@
       <Filter>MainGame\scene</Filter>
     </ClCompile>
     <ClCompile Include="sasuke.cpp">
+      <Filter>MainGame\playerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="sakura.cpp">
+      <Filter>MainGame\playerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="naruto.cpp">
       <Filter>MainGame\playerManager</Filter>
     </ClCompile>
   </ItemGroup>

@@ -65,6 +65,7 @@ public:
 	virtual void leftAttack(void* obj);
 
 	tagPlayer getPlayerStruct() { return _player; }
+	RECT getPlayerAttackRange() { return _player.attackRange; }
 
 	playerManager();
 	~playerManager();

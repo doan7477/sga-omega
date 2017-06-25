@@ -24,6 +24,15 @@ public:
 	virtual void release();
 	virtual void render();
 
+	static void leftHit(void* obj);
+	static void rightHit(void* obj);
+
+	RECT getRect() { return rc; }
+	animation* getAni() { return ani; }
+
+	void setDummyState(DUMMYSTATE ds) { dummystate = ds; }
+	void setDummyAni(animation* an) { ani = an; }
+
 	dummy();
 	~dummy();
 };
