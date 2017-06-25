@@ -71,5 +71,7 @@ void gameScene::collision()
 	if (IntersectRect(&temp, &_player->getPlayerAttackRange(), &_dummy->getRect()))
 	{
 		_dummy->setDummyState(DUMMYSTATE_LEFT_HIT);
+		_dummy->setDummyAni(KEYANIMANAGER->findAnimation("´õ¹Ì¿ŞÂÊ¸ÂÀ½"));
+		_dummy->getAni()->start();
 	}
 }

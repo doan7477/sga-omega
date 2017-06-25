@@ -13,10 +13,13 @@ dummy::~dummy()
 
 HRESULT dummy::init()
 {
+	currentHp = maxHp = 1000.0f;
+
 	x = WINSIZEX - 200;
 	y = WINSIZEY - 50;
 
 	rc = RectMakeCenter(x, y, 50, 50);
+	hitRc = RectMakeCenter(x, y, 25, 50);
 	dummystate = DUMMYSTATE_LEFT_STOP;
 	img = IMAGEMANAGER->addFrameImage("´õ¹Ì", "image/ÇÑµµ¾È/dummy.bmp", 0, 0, 704, 106, 11, 2, true, RGB(255, 0, 255));
 
@@ -26,9 +29,12 @@ HRESULT dummy::init()
 	int dummyLeftHit[] = { 7, 8, 9 };
 	KEYANIMANAGER->addArrayFrameAnimation("´õ¹Ì¿ÞÂÊ¸ÂÀ½", "´õ¹Ì", dummyLeftHit, 3, 10, false, leftHit, this);
 
-	ani = KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊ¸ÂÀ½");
+	ani = KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊÁ¤Áö");
 	ani->start();
 
+	hpBar = new progressBar;
+	hpBar->init(WINSIZEX / 2 + 50, 50, 300, 20);
+	hpBar->setGauge(currentHp, maxHp);
 
 
 	return S_OK;
@@ -37,6 +43,8 @@ HRESULT dummy::init()
 void dummy::update() 
 {
 	KEYANIMANAGER->update();
+	hitRc = RectMakeCenter(x, y, 25, 50);
+	hpBar->update();
 }
 
 void dummy::release()
@@ -46,26 +54,12 @@ void dummy::release()
 
 void dummy::render()
 {
-	Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
-	switch (dummystate)
-	{
-	case DUMMYSTATE_LEFT_STOP:
-		ani = KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊÁ¤Áö");
-		img->aniRender(getMemDC(), rc.left, rc.top, ani);
-		break;
-	case DUMMYSTATE_LEFT_HIT:
-		ani = KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊ¸ÂÀ½");
-		img->aniRender(getMemDC(), rc.left, rc.top, ani);
-		break;
-	case DUMMYSTATE_RIGHT_STOP:
-		ani = KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊÁ¤Áö");
-		img->aniRender(getMemDC(), rc.left, rc.top, ani);
-		break;
-	case DUMMYSTATE_RIGHT_HIT:
-		ani = KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊÁ¤Áö");
-		img->aniRender(getMemDC(), rc.left, rc.top, ani);
-		break;
-	}
+	hpBar->render();
+	//Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
+	//Rectangle(getMemDC(), hitRc.left, hitRc.top, hitRc.right, hitRc.bottom);
+
+	img->aniRender(getMemDC(), rc.left, rc.top, ani);
+	
 }
 
 void dummy::leftHit(void* obj)
@@ -81,5 +75,4 @@ void dummy::rightHit(void* obj)
 	dummy* d = (dummy*)obj;
 	d->setDummyState(DUMMYSTATE_RIGHT_STOP);
 	d->setDummyAni(KEYANIMANAGER->findAnimation("´õ¹Ì¿ÞÂÊÁ¤Áö"));
-	d->getAni()->start();
 }

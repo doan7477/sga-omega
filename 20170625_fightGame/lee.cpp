@@ -48,27 +48,27 @@ HRESULT lee::init()
 
 	//약손
 	int rightSoftPuch[] = { 20,21,22 };
-	KEYANIMANAGER->addArrayFrameAnimation("오른쪽약손", "록리", rightSoftPuch, 3, 6, false, rightFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("오른쪽약손", "록리", rightSoftPuch, 3, 10, false, rightFire, this);
 	int leftSoftPuch[] = { 70,71,72 };
-	KEYANIMANAGER->addArrayFrameAnimation("왼쪽약손", "록리", leftSoftPuch, 3, 6, false, leftFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("왼쪽약손", "록리", leftSoftPuch, 3, 10, false, leftFire, this);
 
 	//강손
 	int rightHardPuch[] = { 23,24,25,26 };
-	KEYANIMANAGER->addArrayFrameAnimation("오른쪽강손", "록리", rightHardPuch, 4, 6, false, rightFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("오른쪽강손", "록리", rightHardPuch, 4, 10, false, rightFire, this);
 	int leftHardPuch[] = { 73,74,75,76 };
-	KEYANIMANAGER->addArrayFrameAnimation("왼쪽강손", "록리", leftHardPuch, 4, 6, false, leftFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("왼쪽강손", "록리", leftHardPuch, 4, 10, false, leftFire, this);
 
 	//약발
 	int rightSoftKick[] = { 27,28,29,30,31,32 };
-	KEYANIMANAGER->addArrayFrameAnimation("오른쪽약발", "록리", rightSoftKick, 6, 6, false, rightFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("오른쪽약발", "록리", rightSoftKick, 6, 10, false, rightFire, this);
 	int leftSoftKick[] = { 77,78,79,80,81,82 };
-	KEYANIMANAGER->addArrayFrameAnimation("왼쪽약발", "록리", leftSoftKick, 6, 6, false, leftFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("왼쪽약발", "록리", leftSoftKick, 6, 10, false, leftFire, this);
 
 	//강발
 	int rightHardKick[] = { 42,43,44,45,46,47,48,49 };
-	KEYANIMANAGER->addArrayFrameAnimation("오른쪽강발", "록리", rightHardKick, 8, 6, false, rightFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("오른쪽강발", "록리", rightHardKick, 8, 10, false, rightFire, this);
 	int leftHardKick[] = { 92,93,94,95,96,97,98,99 };
-	KEYANIMANAGER->addArrayFrameAnimation("왼쪽강발", "록리", leftHardKick, 8, 6, false, leftFire, this);
+	KEYANIMANAGER->addArrayFrameAnimation("왼쪽강발", "록리", leftHardKick, 8, 10, false, leftFire, this);
 
 
 	_player.currentHp = _player.maxHp = 100.0f;
@@ -79,6 +79,9 @@ HRESULT lee::init()
 	_player.y = WINSIZEY - 60;
 	_player.rc = RectMakeCenter(_player.x, _player.y, 50, 50);
 	_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");
+	_player.hpBar = new progressBar;
+	_player.hpBar->init(50, 50, 300, 30);
+	_player.hpBar->setGauge(_player.currentHp, _player.maxHp);
 
 
 	return S_OK;
@@ -96,12 +99,14 @@ void lee::update()
 	{
 		_player.gravity -= 0.1f;
 	}
+	_player.hpBar->update();
 }
 void lee::render()
 {
-	Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	_player.hpBar->render();
+	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	_player.img->aniRender(getMemDC(), _player.rc.left, _player.rc.top, _player.ani);
-	Rectangle(getMemDC(), _player.attackRange.left, _player.attackRange.top, _player.attackRange.right, _player.attackRange.bottom);
+	//Rectangle(getMemDC(), _player.attackRange.left, _player.attackRange.top, _player.attackRange.right, _player.attackRange.bottom);
 }
 
 void lee::attack()

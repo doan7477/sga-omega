@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "progressBar.h"
 
 enum DUMMYSTATE
 {
@@ -13,10 +14,13 @@ class dummy : public gameNode
 {
 private:
 	RECT rc;
+	RECT hitRc;
 	float x, y;
 	image* img;
 	animation* ani;
 	DUMMYSTATE dummystate;
+	progressBar* hpBar;
+	float currentHp, maxHp;
 
 public:
 	virtual HRESULT init();
@@ -27,10 +31,11 @@ public:
 	static void leftHit(void* obj);
 	static void rightHit(void* obj);
 
-	RECT getRect() { return rc; }
+	RECT getRect() { return hitRc; }
 	animation* getAni() { return ani; }
+	DUMMYSTATE getState() { return dummystate; }
 
-	void setDummyState(DUMMYSTATE ds) { dummystate = ds; }
+	void setDummyState(DUMMYSTATE ds) { dummystate = ds; ani->start(); }
 	void setDummyAni(animation* an) { ani = an; }
 
 	dummy();

@@ -43,6 +43,8 @@ void mainGame::update(void)
 {
 	gameNode::update();
 
+	if (KEYMANAGER->isOnceKeyDown('H')) this->init();
+
 
 
 	SCENEMANAGER->update();

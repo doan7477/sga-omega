@@ -89,7 +89,6 @@ HRESULT naruto::init()
 	_player.y = WINSIZEY - 60;
 	_player.rc = RectMakeCenter(_player.x, _player.y, 50, 50);
 	_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");
-	_player.ani->start();
 
 	return S_OK;
 }
@@ -102,8 +101,8 @@ void naruto::release()
 void naruto::update()
 {
 	KEYANIMANAGER->update();
-	move(); 
-	inputKey();
+	move();
+	attack();
 }
 
 void naruto::render()
@@ -135,12 +134,6 @@ void naruto::move()
 
 void naruto::attack()
 {
-	
-}
-
-void naruto::inputKey()
-{
-	///////////////////////////////////////////////////오른쪽이동
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		_player.playerState = PLAYERSTATE_RIGHT_MOVE;
@@ -153,51 +146,11 @@ void naruto::inputKey()
 		_player.ani = KEYANIMANAGER->findAnimation("오른쪽정지");
 		_player.ani->start();
 	}
-	/////////////////////////////////////////////////왼쪽이동
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-	{
-		_player.playerState = PLAYERSTATE_LEFT_MOVE;
-		_player.ani = KEYANIMANAGER->findAnimation("왼쪽이동");
-		_player.ani->start();
-	}
-	else if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
-	{
-		_player.playerState = PLAYERSTATE_LEFT_STOP;
-		_player.ani = KEYANIMANAGER->findAnimation("왼쪽정지");
-		_player.ani->start();
-	}
-	////////////////////////////////////////////////////약손공격
-	if (KEYMANAGER->isOnceKeyDown('A'))
-	{
-		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
-		{
-			_player.playerState = PLAYERSTATE_RIGHT_SOFT_PUNCH;
-			_player.ani = KEYANIMANAGER->findAnimation("오른쪽약손");
-			_player.ani->start();
-		}
-		else if (_player.playerState == PLAYERSTATE_LEFT_STOP || _player.playerState == PLAYERSTATE_LEFT_MOVE || _player.playerState == PLAYERSTATE_LEFT_RUN)
-		{
-			_player.playerState = PLAYERSTATE_LEFT_SOFT_PUNCH;
-			_player.ani = KEYANIMANAGER->findAnimation("왼쪽약손");
-			_player.ani->start();
-		}
-	}
-	////////////////////////////////////////////////강손공격
-	if (KEYMANAGER->isOnceKeyDown('S'))
-	{
-		if (_player.playerState == PLAYERSTATE_RIGHT_STOP || _player.playerState == PLAYERSTATE_RIGHT_MOVE || _player.playerState == PLAYERSTATE_RIGHT_RUN)
-		{
-			_player.playerState = PLAYERSTATE_RIGHT_HARD_PUNCH;
-			_player.ani = KEYANIMANAGER->findAnimation("오른쪽강손");
-			_player.ani->start();
-		}
-		else if (_player.playerState == PLAYERSTATE_LEFT_STOP || _player.playerState == PLAYERSTATE_LEFT_MOVE || _player.playerState == PLAYERSTATE_LEFT_RUN)
-		{
-			_player.playerState = PLAYERSTATE_LEFT_HARD_PUNCH;
-			_player.ani = KEYANIMANAGER->findAnimation("왼쪽강손");
-			_player.ani->start();
-		}
-	}
+}
+
+void naruto::inputKey()
+{
+
 }
 void naruto::setPlayerAni()
 {
