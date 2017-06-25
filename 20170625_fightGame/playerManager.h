@@ -29,7 +29,7 @@ struct tagPlayer
 	RECT rc;
 	PLAYERSTATE playerState;
 	image* img;
-	//progressBar* hpBar;
+	progressBar* hpBar;
 	animation* ani;
 	float currentHp, maxHp;
 	float x, y;

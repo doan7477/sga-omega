@@ -50,7 +50,7 @@ bool pixelCollisionManager::playerLWall(image* destImage, float destX, float des
 {
 	_probeX = destX;
 
-	for (int i = _probeX - destImage->getFrameWidth() / 4;
+	for (int i = _probeX - 10;
 		i < _probeX; ++i)
 	{
 		_color = GetPixel(sourImage->getMemDC(), i, destY);

@@ -98,6 +98,7 @@
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="sasuke.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="selectScene.h" />
     <ClInclude Include="soundManager.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="pixelCollisionManager.cpp" />
     <ClCompile Include="playerManager.cpp" />
     <ClCompile Include="progressBar.cpp" />
+    <ClCompile Include="sasuke.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="selectScene.cpp" />
     <ClCompile Include="soundManager.cpp" />

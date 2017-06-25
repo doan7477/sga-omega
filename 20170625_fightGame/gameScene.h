@@ -2,7 +2,9 @@
 #include "gameNode.h"
 #include "playerManager.h"
 #include "lee.h"
+#include "sasuke.h"
 #include "dummy.h"
+
 
 class gameScene : public gameNode
 {

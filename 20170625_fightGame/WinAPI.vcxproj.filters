@@ -159,6 +159,9 @@
     <ClInclude Include="gameScene.h">
       <Filter>MainGame\scene</Filter>
     </ClInclude>
+    <ClInclude Include="sasuke.h">
+      <Filter>MainGame\playerManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -241,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="gameScene.cpp">
       <Filter>MainGame\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="sasuke.cpp">
+      <Filter>MainGame\playerManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -28,7 +28,7 @@ HRESULT gameScene::init()
 	}
 	if (_selectedChar == 3)
 	{
-		_player = new lee;
+		_player = new sasuke;
 		_player->init();
 	}
 	if (_selectedChar == 4)
@@ -48,13 +48,14 @@ void gameScene::release()
 }
 void gameScene::update()
 {
+	SOUNDMANAGER->update();
 	_player->update();
 	_dummy->update();
 }
 void gameScene::render()
 {
 	IMAGEMANAGER->render("픽셀라인", getMemDC(), 0, 0);
-	IMAGEMANAGER->render("백그라운드", getMemDC(), 0, 0);
+	//IMAGEMANAGER->render("백그라운드", getMemDC(), 0, 0);
 
 	_player->render();
 	_dummy->render();

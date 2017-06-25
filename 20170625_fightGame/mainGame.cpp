@@ -17,10 +17,11 @@ HRESULT mainGame::init(void)
 	gameNode::init(true);
 	//배경 이미지
 	IMAGEMANAGER->addImage("백그라운드", "image/한도안/background.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("픽셀라인", "image/한도안/pixelLine,bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("픽셀라인", "image/한도안/pixelLine.bmp", 800, 600, true, RGB(255, 0, 255));
+	SOUNDMANAGER->addSound("선택", "sound/선택.mp3", TRUE, TRUE);
+	SOUNDMANAGER->addSound("게임씬", "sound/격투.mp3", TRUE, TRUE);
 
 	//씬을 등록해둔다
-
 	SCENEMANAGER->addScene("인게임씬", new gameScene);
 	SCENEMANAGER->addScene("선택씬", new selectScene);
 	

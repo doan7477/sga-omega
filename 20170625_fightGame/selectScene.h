@@ -10,6 +10,8 @@ private:
 	char* _characterName[4];
 	char* _showName[4];
 	int _nowCharacter;
+	int _alpha;
+	bool _isSelect;
 
 public:
 	HRESULT init();
