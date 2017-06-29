@@ -16,6 +16,10 @@ HRESULT mainGame::init(void)
 {
 	gameNode::init(true);
 
+	SCENEMANAGER->addScene("로딩씬", new loadingScene);
+	SCENEMANAGER->addScene("게임씬", new gameScene);
+
+	SCENEMANAGER->changeScene("로딩씬");
 
 	return S_OK;
 }
@@ -33,7 +37,7 @@ void mainGame::update(void)
 {
 	gameNode::update();
 
-
+	SCENEMANAGER->update();
 }
 
 //여기가 그려주는 곳
@@ -42,8 +46,8 @@ void mainGame::render(void)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//==============================================================================
 	
+	SCENEMANAGER->render();
 	
-	TIMEMANAGER->render(getMemDC());
 	//================================================================================
 	//건들지마라 이거도
 	this->getBackBuffer()->render(getHDC(), 0, 0);

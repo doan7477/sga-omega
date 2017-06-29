@@ -58,6 +58,18 @@
     <Filter Include="MainGame\loadingScene">
       <UniqueIdentifier>{3984a030-59de-4262-bb01-8f3171175acd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\gameScene">
+      <UniqueIdentifier>{a3eaa53c-d6a5-41ba-a740-deb6924bd3ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\player">
+      <UniqueIdentifier>{0120b7c9-3538-4c83-a918-a8bc135786a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\arrow">
+      <UniqueIdentifier>{ddc054da-29fc-4e83-8e22-e8ae6ece42d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\frameImage">
+      <UniqueIdentifier>{4b0a451c-1976-417f-a894-1b58685e83e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -147,6 +159,21 @@
     <ClInclude Include="collision.h">
       <Filter>2DGameFramework\UTIL</Filter>
     </ClInclude>
+    <ClInclude Include="gameScene.h">
+      <Filter>MainGame\gameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>MainGame\player</Filter>
+    </ClInclude>
+    <ClInclude Include="arrow.h">
+      <Filter>MainGame\arrow</Filter>
+    </ClInclude>
+    <ClInclude Include="frameImageManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="frameImage.h">
+      <Filter>2DGameFramework\frameImage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -220,6 +247,21 @@
     </ClCompile>
     <ClCompile Include="collision.cpp">
       <Filter>2DGameFramework\UTIL</Filter>
+    </ClCompile>
+    <ClCompile Include="gameScene.cpp">
+      <Filter>MainGame\gameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>MainGame\player</Filter>
+    </ClCompile>
+    <ClCompile Include="arrow.cpp">
+      <Filter>MainGame\arrow</Filter>
+    </ClCompile>
+    <ClCompile Include="frameImageManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="frameImage.cpp">
+      <Filter>2DGameFramework\frameImage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

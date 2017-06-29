@@ -110,8 +110,6 @@ loading::~loading()
 
 HRESULT loading::init()
 {
-	_background = IMAGEMANAGER->addImage("로딩백그라운드", "히오스메인.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
-
 	_loadingBar = new progressBar;
 	_loadingBar->init("loadingBarTop", "loadingBarBottom", WINSIZEX / 2, WINSIZEY - 20, WINSIZEX, 20);
 	_loadingBar->setGauge(0, 0);
@@ -133,7 +131,6 @@ void loading::update()
 
 void loading::render() 
 {
-	_background->render(getMemDC(), 0 ,0);
 	_loadingBar->render();
 }
 

@@ -27,17 +27,17 @@ void loadingScene::release()
 	SAFE_DELETE(_loading);
 }
 
-void loadingScene::update()	
+void loadingScene::update()
 {
 	_loading->update();
 
 	if (_loading->loadingDone())
 	{
-		SCENEMANAGER->changeScene("캐릭선택씬");
+		SCENEMANAGER->changeScene("게임씬");
 	}
 }
 
-void loadingScene::render()	
+void loadingScene::render()
 {
 	_loading->render();
 }
@@ -45,12 +45,21 @@ void loadingScene::render()
 
 void loadingScene::loadingImage()
 {
-	//이미지가 여러장이 아니니까 포문 돌려서
-	//이미지 1장을 300개 올리겠다는 뜻임
-	for (int i = 0; i < 1000; i++)
-	{
-		_loading->loadImage("캐릭선택", WINSIZEX, WINSIZEY);
-	}
+	_loading->loadImage("배경", "image/봉기남/map1-1.bmp", 1800, 1200, true, RGB(255, 255, 255));
+
+	_loading->loadFrameImage("정지", "image/봉기남/idle.bmp", 450, 222, 6, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("달리기", "image/봉기남/run.bmp", 900, 222, 10, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("브레이크", "image/봉기남/brake.bmp", 588, 235, 7, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("턴", "image/봉기남/turn.bmp", 207, 228, 3, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("점프", "image/봉기남/jump.bmp", 207, 222, 3, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("폴", "image/봉기남/fall.bmp", 375, 240, 5, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("앉기", "image/봉기남/crouch.bmp", 216, 168, 4, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("일어서기", "image/봉기남/rise.bmp", 120, 210, 2, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("구르기", "image/봉기남/roll.bmp", 768, 204, 8, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("공격1", "image/봉기남/attack1.bmp", 567, 216, 7, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("공격2", "image/봉기남/attack2.bmp", 609, 222, 7, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("공격3", "image/봉기남/attack3.bmp", 1155, 222, 11, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("평지활", "image/봉기남/bow.bmp", 486, 270, 6, 2, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()
