@@ -6,6 +6,8 @@ class gameScene : public gameNode
 {
 private:
 	player* _player;
+	float _camX;
+	float _camY;
 
 public:
 	HRESULT init();

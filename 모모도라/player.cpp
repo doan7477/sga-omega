@@ -16,7 +16,7 @@ HRESULT player::init()
 	_player.imgName = "정지";
 	_player.img = IMAGEMANAGER->findImage(_player.imgName);
 	_player.x = 200;
-	_player.y = 560;
+	_player.y = 600;
 	_player.speed = 1.5f;
 	_player.fps = 0;
 	_player.jumpPower = JUMPPOWER;
@@ -40,13 +40,17 @@ void player::update()
 	inputKey();
 	move();
 	pixelCollision();
-	if (_player.isJump) _player.jumpPower -= GRAVITY;
+	if (_player.isJump)
+	{
+		_player.jumpPower -= GRAVITY;
+	}
+
 }
 
-void player::render() 
+void player::render(float x, float y) 
 {
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
-	_player.img->frameRender(getMemDC(), _player.rc.left, _player.rc.top);
+	_player.img->frameRender(getMemDC(), _player.rc.left - x, _player.rc.top - y);
 	if (_player.imgName == "정지")
 	{
 		if (_player.fps % 8 == 0)
@@ -390,12 +394,14 @@ void player::move()
 	switch (_player.state)
 	{
 	case PLAYERSTATE_LEFT_IDLE:
+		_player.isJump = false;
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		_player.imgName = "정지";
 		_player.img = IMAGEMANAGER->findImage(_player.imgName);
 		_player.img->setFrameY(1);
 		break;
 	case PLAYERSTATE_RIGHT_IDLE:
+		_player.isJump = false;
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		_player.imgName = "정지";
 		_player.img = IMAGEMANAGER->findImage(_player.imgName);
@@ -428,11 +434,11 @@ void player::move()
 		break;
 	case PLAYERSTATE_LEFT_ROLL:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x -= MAXSPEED * 2;
+		_player.x -= ROLLSPEED;
 		break;
 	case PLAYERSTATE_RIGHT_ROLL:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x += MAXSPEED * 2;
+		_player.x += ROLLSPEED;
 		break;
 	case PLAYERSTATE_FALL:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
@@ -484,6 +490,10 @@ void player::imageSet(char* imgName, bool direction)
 
 void player::pixelCollision()
 {
+	/*if (!PIXELMANAGER->isPixelCollisionBottomY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("맵1-1픽셀")))
+	{
+		_player.isJump = true;
+	}*/
 	switch (_player.state)
 	{
 	case PLAYERSTATE_JUMP:

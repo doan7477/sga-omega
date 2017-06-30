@@ -46,8 +46,8 @@ void loadingScene::render()
 void loadingScene::loadingImage()
 {
 	_loading->loadImage("¹è°æ", "image/background/background.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 255, 255));
-	_loading->loadImage("¸Ê1-1", "image/background/map 1-1.bmp", 900, 846, true, RGB(255, 0, 255));
-	_loading->loadImage("¸Ê1-1ÇÈ¼¿", "image/background/map1-1_pixel.bmp", 900, 846, true, RGB(255, 0, 255));
+	_loading->loadImage("¸Ê1-1", "image/background/map 1-1.bmp", 1500, 1410, true, RGB(255, 0, 255));
+	_loading->loadImage("¸Ê1-1ÇÈ¼¿", "image/background/map1-1_pixel.bmp", 1500, 1410, true, RGB(255, 0, 255));
 
 	_loading->loadFrameImage("Á¤Áö", "image/ºÀ±â³²/idle.bmp", 450, 222, 6, 2, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("´Þ¸®±â", "image/ºÀ±â³²/run.bmp", 900, 222, 10, 2, true, RGB(255, 0, 255));

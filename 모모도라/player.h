@@ -1,7 +1,8 @@
 #pragma once
 #include "gameNode.h"
 
-#define MAXSPEED 3.0f
+#define MAXSPEED 5.0f
+#define ROLLSPEED 7.5f
 #define MINSPEED 1.5f
 #define JUMPPOWER 6.0f
 #define GRAVITY 0.1f
@@ -71,12 +72,16 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(float x, float y);
 
 	void inputKey();
 	void move();
 	void imageSet(char* imgName, bool direction);
 	void pixelCollision();
+
+	POINT getPlayerCenter() { return PointMake(_player.x, _player.y); }
+	float getPlayerSpeed() { return _player.speed; }
+	float getPlayerJumpPower() { return _player.jumpPower; }
 
 	player();
 	~player();
