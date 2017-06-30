@@ -70,6 +70,21 @@
     <Filter Include="2DGameFramework\frameImage">
       <UniqueIdentifier>{4b0a451c-1976-417f-a894-1b58685e83e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\enemyManager">
+      <UniqueIdentifier>{7c7eb20d-b599-43e1-9915-d261f3777d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\bullet">
+      <UniqueIdentifier>{648d8c64-cce9-4432-ae2b-b6f7f2a5df69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\shop">
+      <UniqueIdentifier>{cf50b147-2bae-43e7-8dce-4fac775e8ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\inventory">
+      <UniqueIdentifier>{84506f47-a036-444f-a3ac-3ea672bd5260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\item">
+      <UniqueIdentifier>{191e0baa-b808-40ad-84b5-16d0b896ae80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -177,6 +192,27 @@
     <ClInclude Include="pixelCollisionManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>MainGame\enemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>MainGame\enemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="bullets.h">
+      <Filter>MainGame\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>MainGame\enemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="shop.h">
+      <Filter>MainGame\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>MainGame\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>MainGame\item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -268,6 +304,27 @@
     </ClCompile>
     <ClCompile Include="pixelCollisionManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>MainGame\enemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>MainGame\enemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="bullets.cpp">
+      <Filter>MainGame\bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>MainGame\enemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="shop.cpp">
+      <Filter>MainGame\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>MainGame\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>MainGame\item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
