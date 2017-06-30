@@ -38,6 +38,7 @@ enum PLAYERSTATE
 	PLAYERSTATE_RIGHT_ATTACK1,
 	PLAYERSTATE_RIGHT_ATTACK2,
 	PLAYERSTATE_RIGHT_ATTACK3,
+	PLAYERSTATE_JUMP_ATTACK,
 	PLAYERSTATE_RIGHT_BOW,
 	PLAYERSTATE_RIGHT_JUMPBOW,
 	PLAYERSTATE_RIGHT_CROUCHBOW
@@ -54,9 +55,9 @@ struct tagPlayer
 	float				gravity;
 	int					fps;
 	char*				imgName;
-	bool				isMove;
 	bool				isJump;
 	bool				isJump2;
+	bool				isAirAttack;
 };
 
 typedef void(*CALLBACK_FUNCTION_PARAMETER)(void*);
@@ -80,6 +81,7 @@ public:
 	void pixelCollision();
 
 	POINT getPlayerCenter() { return PointMake(_player.x, _player.y); }
+	BOOL getPlayerIsJump() { return _player.isJump; }
 	float getPlayerSpeed() { return _player.speed; }
 	float getPlayerJumpPower() { return _player.jumpPower; }
 

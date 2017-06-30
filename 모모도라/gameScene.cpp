@@ -40,5 +40,7 @@ void gameScene::render()
 	IMAGEMANAGER->findImage("¹è°æ")->render(getMemDC(), 0, 0);
 	_player->render(_camX,_camY);
 	IMAGEMANAGER->findImage("¸Ê1-1")->render(getMemDC(), -_camX, -_camY);
-	IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")->render(getMemDC(), -_camX, -_camY);
+	if (_player->getPlayerIsJump()) TextOut(getMemDC(), 0, 0, "Æ®·ç", strlen("Æ®·ç"));
+	if (!_player->getPlayerIsJump()) TextOut(getMemDC(), 0, 0, "Æú½º", strlen("Æú½º"));
+	//IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")->render(getMemDC(), -_camX, -_camY);
 }

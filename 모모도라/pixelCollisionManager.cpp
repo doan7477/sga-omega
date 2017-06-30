@@ -49,7 +49,7 @@ bool pixelCollisionManager::isPixelCollisionBottomY(image* destImage, float dest
 {
 	_probeY = destY + destImage->getFrameHeight() / 2;
 
-	for (int i = _probeY - 5; i < _probeY; ++i)
+	for (int i = _probeY; i < _probeY + 3; ++i)
 	{
 		_color = GetPixel(sourImage->getMemDC(), destX, i);
 
@@ -61,9 +61,9 @@ bool pixelCollisionManager::isPixelCollisionBottomY(image* destImage, float dest
 		{
 			return true;
 		}
+		else return false;
 	}
 
-	return false;
 }
 
 bool pixelCollisionManager::isPixelCollisionLeftX(image* destImage, float destX, float destY, image* sourImage)	
@@ -90,7 +90,7 @@ bool pixelCollisionManager::isPixelCollisionRightX(image* destImage, float destX
 {
 	_probeX = destX;
 
-	for (int i = _probeX - destImage->getFrameWidth() / 2; i < _probeX + destImage->getFrameWidth() / 2; ++i)
+	for (int i = _probeX; i < _probeX + destImage->getFrameWidth() / 2; ++i)
 	{
 		_color = GetPixel(sourImage->getMemDC(), i, destY);
 
@@ -106,6 +106,25 @@ bool pixelCollisionManager::isPixelCollisionRightX(image* destImage, float destX
 	return false;
 }
 
+bool pixelCollisionManager::isDownJump(image* destImg, float destX, float destY, image* sourImg)
+{
+	_probeY = destY + destImg->getFrameHeight() / 2;
+
+	for (int i = _probeY; i < _probeY + 3; ++i)
+	{
+		_color = GetPixel(sourImg->getMemDC(), destX, i);
+
+		_r = GetRValue(_color);
+		_g = GetGValue(_color);
+		_b = GetBValue(_color);
+
+		if ((_r == 255 && _g == 255 && _b == 0))
+		{
+			return true;
+		}
+		else return false;
+	}
+}
 
 
 float pixelCollisionManager::getPixelCollisionY(image* destImage, float destX, float destY, image* sourImage)

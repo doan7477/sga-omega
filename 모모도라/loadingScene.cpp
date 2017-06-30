@@ -61,7 +61,10 @@ void loadingScene::loadingImage()
 	_loading->loadFrameImage("∞¯∞›1", "image/∫¿±‚≥≤/attack1.bmp", 567, 216, 7, 2, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("∞¯∞›2", "image/∫¿±‚≥≤/attack2.bmp", 609, 222, 7, 2, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("∞¯∞›3", "image/∫¿±‚≥≤/attack3.bmp", 1155, 222, 11, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("¡°«¡∞¯∞›", "image/∫¿±‚≥≤/jumpAttack1.bmp", 483, 216, 7, 2, true, RGB(255, 0, 255));
 	_loading->loadFrameImage("∆Ú¡ˆ»∞", "image/∫¿±‚≥≤/bow.bmp", 486, 270, 6, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("¡°«¡»∞", "image/∫¿±‚≥≤/jumpBow.bmp", 486, 270, 6, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("æ…±‚»∞", "image/∫¿±‚≥≤/crouchBow.bmp", 486, 210, 6, 2, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()

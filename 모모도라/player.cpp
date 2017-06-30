@@ -23,7 +23,7 @@ HRESULT player::init()
 	_player.gravity = GRAVITY;
 	_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 	_player.state = PLAYERSTATE_RIGHT_IDLE;
-	_player.isJump = _player.isJump = _player.isJump2 = false;
+	_player.isAirAttack = _player.isJump = _player.isJump2 = false;
 
 
 	return S_OK;
@@ -52,6 +52,13 @@ void player::render(float x, float y)
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	_player.img->frameRender(getMemDC(), _player.rc.left - x, _player.rc.top - y);
 	if (_player.imgName == "Á¤Áö")
+	{
+		if (_player.fps % 8 == 0)
+		{
+			_player.img->setFrameX(_player.img->getFrameX() + 1);
+		}
+	}
+	else if (_player.imgName == "ÆòÁöÈ°")
 	{
 		if (_player.fps % 8 == 0)
 		{
@@ -128,6 +135,27 @@ void player::render(float x, float y)
 		{
 			if (_player.state == PLAYERSTATE_LEFT_ATTACK3) _player.state = PLAYERSTATE_LEFT_IDLE;
 			if (_player.state == PLAYERSTATE_RIGHT_ATTACK3) _player.state = PLAYERSTATE_RIGHT_IDLE;
+		}
+		break;
+	case PLAYERSTATE_LEFT_BOW: case PLAYERSTATE_RIGHT_BOW:
+		if (_player.img->getFrameX() >= _player.img->getMaxFrameX())
+		{
+			if (_player.state == PLAYERSTATE_LEFT_BOW) _player.state = PLAYERSTATE_LEFT_IDLE;
+			if (_player.state == PLAYERSTATE_RIGHT_BOW) _player.state = PLAYERSTATE_RIGHT_IDLE;
+		}
+		break;
+	case PLAYERSTATE_LEFT_JUMPBOW: case PLAYERSTATE_RIGHT_JUMPBOW:
+		if (_player.img->getFrameX() >= _player.img->getMaxFrameX())
+		{
+			if (_player.state == PLAYERSTATE_LEFT_JUMPBOW) _player.state = PLAYERSTATE_LEFT_IDLE;
+			if (_player.state == PLAYERSTATE_RIGHT_JUMPBOW) _player.state = PLAYERSTATE_RIGHT_IDLE;
+		}
+		break;
+	case PLAYERSTATE_LEFT_CROUCHBOW: case PLAYERSTATE_RIGHT_CROUCHBOW:
+		if (_player.img->getFrameX() >= _player.img->getMaxFrameX())
+		{
+			if (_player.state == PLAYERSTATE_LEFT_CROUCHBOW) _player.state = PLAYERSTATE_LEFT_IDLE;
+			if (_player.state == PLAYERSTATE_RIGHT_CROUCHBOW) _player.state = PLAYERSTATE_RIGHT_IDLE;
 		}
 		break;
 	case PLAYERSTATE_LEFT_ROLL: case PLAYERSTATE_RIGHT_ROLL:
@@ -221,11 +249,12 @@ void player::inputKey()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && !_player.isJump2)
+
+
+	//Á¡ÇÁ
+	if (KEYMANAGER->isOnceKeyDown('A') && !_player.isJump2)
 	{
-		_player.isJump = true;
-		_player.jumpPower = JUMPPOWER;
-		_player.gravity = GRAVITY;
+		_player.isAirAttack = false;
 		if (_player.state == PLAYERSTATE_LEFT_IDLE || _player.state == PLAYERSTATE_LEFT_BRAKE || _player.state == PLAYERSTATE_LEFT_RUN)
 		{
 			imageSet("Á¡ÇÁ", false);
@@ -234,71 +263,17 @@ void player::inputKey()
 		{
 			imageSet("Á¡ÇÁ", true);
 		}
-		_player.state = PLAYERSTATE_JUMP;
-	}
-	if (_player.state == PLAYERSTATE_LEFT_CROUCH || _player.state == PLAYERSTATE_RIGHT_CROUCH)
-	{
-		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+		else if (_player.state == PLAYERSTATE_JUMP)
 		{
-			_player.isJump = true;
-			_player.gravity = GRAVITY;
-			if (_player.state == PLAYERSTATE_LEFT_CROUCH)
-			{
-				imageSet("Æú", false);
-			}
-			if (_player.state == PLAYERSTATE_RIGHT_CROUCH)
-			{
-				imageSet("Æú", true);
-			}
-			_player.state = PLAYERSTATE_DOWN_JUMP;
-		}
-	}
-
-	if (_player.state == PLAYERSTATE_JUMP)
-	{
-		if (_player.jumpPower < 0)
-		{
-			_player.state = PLAYERSTATE_FALL;
-			if (_player.img->getFrameY() == 1)
-			{
-				imageSet("Æú", false);
-			}
-			else if (_player.img->getFrameY() == 0)
-			{
-				imageSet("Æú", true);
-			}
-		}
-		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
-		{
-			_player.state = PLAYERSTATE_JUMP;
-			imageSet("Á¡ÇÁ", true);
 			_player.isJump2 = true;
+			_player.jumpPower = JUMPPOWER;
+			_player.gravity = GRAVITY;
 		}
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-		{
-			_player.x -= MAXSPEED;
-			imageSet("Á¡ÇÁ", false);
-			_player.img->setFrameX(_player.img->getMaxFrameX() - 1);
-		}
-		else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-		{
-			_player.x += MAXSPEED;
-			imageSet("Á¡ÇÁ", true);
-			_player.img->setFrameX(_player.img->getMaxFrameX() - 1);
-		}
-	}
-	if (_player.state == PLAYERSTATE_FALL)
-	{
-		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-		{
-			_player.x -= MAXSPEED;
-			imageSet("Æú", false);
-		}
-		else if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-		{
-			_player.x += MAXSPEED;
-			imageSet("Æú", true);
-		}
+		else return;
+		_player.state = PLAYERSTATE_JUMP;
+		_player.isJump = true;
+		_player.jumpPower = JUMPPOWER;
+		_player.gravity = GRAVITY;
 	}
 
 	//¾É±â
@@ -331,7 +306,8 @@ void player::inputKey()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LSHIFT))
+	//±¸¸£±â
+	if (KEYMANAGER->isOnceKeyDown('Q'))
 	{
 		if (_player.state == PLAYERSTATE_LEFT_IDLE || _player.state == PLAYERSTATE_LEFT_BRAKE || _player.state == PLAYERSTATE_LEFT_RUN)
 		{
@@ -346,7 +322,7 @@ void player::inputKey()
 	}
 
 	//±ÙÁ¢ °ø°ÝÅ°
-	if (KEYMANAGER->isOnceKeyDown(VK_LCONTROL))
+	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
 		if (_player.state == PLAYERSTATE_LEFT_IDLE || _player.state == PLAYERSTATE_LEFT_RUN || _player.state == PLAYERSTATE_LEFT_BRAKE)
 		{
@@ -384,6 +360,49 @@ void player::inputKey()
 			if (_player.imgName == "°ø°Ý3") return;
 			imageSet("°ø°Ý3", true);
 		}
+		else if ((_player.isJump || _player.isJump2) && !_player.isAirAttack)
+		{
+			_player.isAirAttack = true;
+			if (_player.img->getFrameY() == 0) imageSet("Á¡ÇÁ°ø°Ý", true);
+			if (_player.img->getFrameY() == 1) imageSet("Á¡ÇÁ°ø°Ý", false);
+		}
+	}
+
+	//È° °ø°Ý
+	if (KEYMANAGER->isOnceKeyDown('D'))
+	{
+		if (_player.state == PLAYERSTATE_LEFT_IDLE || _player.state == PLAYERSTATE_LEFT_RUN || _player.state == PLAYERSTATE_LEFT_BRAKE)
+		{
+			_player.state = PLAYERSTATE_LEFT_BOW;
+			imageSet("ÆòÁöÈ°", false);
+		}
+		else if (_player.state == PLAYERSTATE_RIGHT_IDLE || _player.state == PLAYERSTATE_RIGHT_RUN || _player.state == PLAYERSTATE_RIGHT_BRAKE)
+		{
+			_player.state = PLAYERSTATE_RIGHT_BOW;
+			imageSet("ÆòÁöÈ°", true);
+		}
+		else if (_player.state == PLAYERSTATE_LEFT_CROUCH)
+		{
+			_player.state = PLAYERSTATE_LEFT_CROUCHBOW;
+			imageSet("¾É±âÈ°", false);
+		}
+		else if (_player.state == PLAYERSTATE_RIGHT_CROUCH)
+		{
+			_player.state = PLAYERSTATE_RIGHT_CROUCHBOW;
+			imageSet("¾É±âÈ°", true);
+		}
+		else if ((_player.state == PLAYERSTATE_JUMP || _player.state == PLAYERSTATE_FALL) && !_player.isAirAttack)
+		{
+			_player.isAirAttack = true;
+			if (_player.img->getFrameY() == 0)
+			{
+				imageSet("Á¡ÇÁÈ°", true);
+			}
+			else if (_player.img->getFrameY() == 1)
+			{
+				imageSet("Á¡ÇÁÈ°", false);
+			}
+		}
 	}
 }
 
@@ -408,41 +427,104 @@ void player::move()
 		_player.img->setFrameY(0);
 		break;
 	case PLAYERSTATE_LEFT_RUN:
-		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x -= _player.speed;
+		if (!PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+			_player.x -= _player.speed;
+		}
 		break;
 	case PLAYERSTATE_RIGHT_RUN:
-		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x += _player.speed;
+		if (!PIXELMANAGER->isPixelCollisionRightX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+			_player.x += _player.speed;
+		}
 		break;
 	case PLAYERSTATE_LEFT_BRAKE:
-		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x -= _player.speed / 5;
+		if (!PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+			_player.x -= _player.speed / 5;
+		}
 		break;
 	case PLAYERSTATE_RIGHT_BRAKE:
-		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x += _player.speed / 5;
+		if (!PIXELMANAGER->isPixelCollisionRightX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+			_player.x += _player.speed / 5;
+		}
 		break;
 	case PLAYERSTATE_JUMP:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		_player.y -= _player.jumpPower;
 		_player.jumpPower -= _player.gravity;
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT) && !PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.x -= MAXSPEED;
+			//imageSet("Á¡ÇÁ", false);
+		}
+		if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !PIXELMANAGER->isPixelCollisionRightX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.x += MAXSPEED;
+			//imageSet("Á¡ÇÁ", true);
+		}
+		if (_player.jumpPower < 0 && _player.imgName != "Á¡ÇÁ°ø°Ý" && _player.imgName != "Á¡ÇÁÈ°" && _player.imgName != "¾É±âÈ°")
+		{
+			_player.state = PLAYERSTATE_FALL;
+			if (_player.img->getFrameY() == 1)
+			{
+				imageSet("Æú", false);
+			}
+			else if (_player.img->getFrameY() == 0)
+			{
+				imageSet("Æú", true);
+			}
+		}
+		if ((_player.imgName == "Á¡ÇÁ°ø°Ý" || _player.imgName == "Á¡ÇÁÈ°" || _player.imgName == "¾É±âÈ°") && _player.img->getFrameX() == _player.img->getMaxFrameX())
+		{
+			_player.state = PLAYERSTATE_FALL;
+			if (_player.img->getFrameY() == 1)
+			{
+				imageSet("Æú", false);
+			}
+			else if (_player.img->getFrameY() == 0)
+			{
+				imageSet("Æú", true);
+			}
+		}
+		else return;
 		break;
 	case PLAYERSTATE_DOWN_JUMP:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		_player.y -= _player.gravity;
 		break;
 	case PLAYERSTATE_LEFT_ROLL:
-		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x -= ROLLSPEED;
+		if (!PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+			_player.x -= ROLLSPEED;
+		}
 		break;
 	case PLAYERSTATE_RIGHT_ROLL:
-		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.x += ROLLSPEED;
+		if (!PIXELMANAGER->isPixelCollisionRightX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+			_player.x += ROLLSPEED;
+		}
 		break;
 	case PLAYERSTATE_FALL:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		if (_player.isJump) _player.y -= _player.jumpPower;
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT) && !PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.x -= MAXSPEED;
+			imageSet("Æú", false);
+		}
+		else if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !PIXELMANAGER->isPixelCollisionRightX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.x += MAXSPEED;
+			imageSet("Æú", true);
+		}
 		break;
 	case PLAYERSTATE_LEFT_CROUCH: case PLAYERSTATE_RIGHT_CROUCH:
 		_player.rc = RectMakeCenter(_player.x, _player.y + 14, _player.img->getFrameWidth(), _player.img->getFrameHeight());
@@ -474,7 +556,15 @@ void player::move()
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		_player.x += _player.speed / 2.5f;
 		break;
-	
+	case PLAYERSTATE_LEFT_BOW: case PLAYERSTATE_RIGHT_BOW:
+		_player.rc = RectMakeCenter(_player.x, _player.y - 13, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		break;
+	case PLAYERSTATE_LEFT_JUMPBOW: case PLAYERSTATE_RIGHT_JUMPBOW:
+		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		break;
+	case PLAYERSTATE_LEFT_CROUCHBOW: case PLAYERSTATE_RIGHT_CROUCHBOW:
+		_player.rc = RectMakeCenter(_player.x, _player.y + 14, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		break;
 	}
 }
 
@@ -490,13 +580,16 @@ void player::imageSet(char* imgName, bool direction)
 
 void player::pixelCollision()
 {
-	/*if (!PIXELMANAGER->isPixelCollisionBottomY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
-	{
-		_player.isJump = true;
-	}*/
 	switch (_player.state)
 	{
 	case PLAYERSTATE_JUMP:
+		if (PIXELMANAGER->isPixelCollisionTopY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.state = PLAYERSTATE_FALL;
+			_player.jumpPower = 0;
+			if (_player.img->getFrameY() == 0) imageSet("Æú", true);
+			if (_player.img->getFrameY() == 1) imageSet("Æú", false);
+		}
 		break;
 	case PLAYERSTATE_FALL:
 		if (PIXELMANAGER->isPixelCollisionBottomY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
@@ -516,7 +609,17 @@ void player::pixelCollision()
 		}
 		break;
 	case PLAYERSTATE_RIGHT_IDLE: case PLAYERSTATE_LEFT_IDLE: case PLAYERSTATE_LEFT_RUN: case PLAYERSTATE_RIGHT_RUN:
+	case PLAYERSTATE_RIGHT_ROLL: case PLAYERSTATE_LEFT_ROLL: case PLAYERSTATE_LEFT_ATTACK1: case PLAYERSTATE_LEFT_ATTACK2:
+	case PLAYERSTATE_LEFT_ATTACK3: case PLAYERSTATE_RIGHT_ATTACK1: case PLAYERSTATE_RIGHT_ATTACK2:
+	case PLAYERSTATE_RIGHT_ATTACK3:
 		_player.y = PIXELMANAGER->getPixelCollisionY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿"));
 		break;
+	case PLAYERSTATE_DOWN_JUMP:
+		if (PIXELMANAGER->isDownJump(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))
+		{
+			_player.jumpPower = 0;
+			if (_player.img->getFrameY() == 0) imageSet("Æú", true);
+			if (_player.img->getFrameY() == 1) imageSet("Æú", false);
+		}
 	}
 }

@@ -18,6 +18,8 @@ public:
 	bool isPixelCollisionLeftX(image* destImage, float destX, float destY, image* sourImage);
 	bool isPixelCollisionRightX(image* destImage, float destX, float destY, image* sourImage);
 
+	bool isDownJump(image* destImg, float destX, float destY, image* sourImg);
+
 	float getPixelCollisionY(image* destImage, float destX, float destY, image* sourImage);		
 	float getPixelCollisionLeftX(char* imgName, char* sourImg, float destX, float destY);
 
