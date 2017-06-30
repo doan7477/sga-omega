@@ -85,6 +85,9 @@
     <Filter Include="MainGame\item">
       <UniqueIdentifier>{191e0baa-b808-40ad-84b5-16d0b896ae80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\opening">
+      <UniqueIdentifier>{993d6184-ba8f-4039-a711-d8f65c3dbebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -213,6 +216,9 @@
     <ClInclude Include="item.h">
       <Filter>MainGame\item</Filter>
     </ClInclude>
+    <ClInclude Include="opening.h">
+      <Filter>MainGame\opening</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -325,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="item.cpp">
       <Filter>MainGame\item</Filter>
+    </ClCompile>
+    <ClCompile Include="opening.cpp">
+      <Filter>MainGame\opening</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

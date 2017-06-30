@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "loadingScene.h"
 #include "gameScene.h"
+#include "opening.h"
 
 
 class mainGame : public gameNode

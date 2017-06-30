@@ -18,8 +18,9 @@ HRESULT mainGame::init(void)
 
 	SCENEMANAGER->addScene("·Îµù¾À", new loadingScene);
 	SCENEMANAGER->addScene("°ÔÀÓ¾À", new gameScene);
+	SCENEMANAGER->addScene("¿ÀÇÁ´×", new opening);
 
-	SCENEMANAGER->changeScene("·Îµù¾À");
+	SCENEMANAGER->changeScene("¿ÀÇÁ´×");
 
 	return S_OK;
 }

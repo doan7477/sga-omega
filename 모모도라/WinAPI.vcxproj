@@ -104,6 +104,7 @@
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mainGame.h" />
+    <ClInclude Include="opening.h" />
     <ClInclude Include="pixelCollisionManager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="progressBar.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mainGame.cpp" />
+    <ClCompile Include="opening.cpp" />
     <ClCompile Include="pixelCollisionManager.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="progressBar.cpp" />
