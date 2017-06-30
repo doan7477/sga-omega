@@ -174,6 +174,9 @@
     <ClInclude Include="frameImage.h">
       <Filter>2DGameFramework\frameImage</Filter>
     </ClInclude>
+    <ClInclude Include="pixelCollisionManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="frameImage.cpp">
       <Filter>2DGameFramework\frameImage</Filter>
+    </ClCompile>
+    <ClCompile Include="pixelCollisionManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

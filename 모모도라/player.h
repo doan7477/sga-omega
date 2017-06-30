@@ -26,6 +26,7 @@ enum PLAYERSTATE
 	PLAYERSTATE_LEFT_RISE,
 	PLAYERSTATE_RIGHT_RISE,
 	PLAYERSTATE_JUMP,
+	PLAYERSTATE_DOWN_JUMP,
 	PLAYERSTATE_FALL,
 	PLAYERSTATE_LEFT_ATTACK1,
 	PLAYERSTATE_LEFT_ATTACK2,
@@ -75,7 +76,7 @@ public:
 	void inputKey();
 	void move();
 	void imageSet(char* imgName, bool direction);
-	void jump(float* x, float* y, float power, float gravity);
+	void pixelCollision();
 
 	player();
 	~player();

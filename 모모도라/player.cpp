@@ -16,7 +16,7 @@ HRESULT player::init()
 	_player.imgName = "정지";
 	_player.img = IMAGEMANAGER->findImage(_player.imgName);
 	_player.x = 200;
-	_player.y = WINSIZEY / 2;
+	_player.y = 560;
 	_player.speed = 1.5f;
 	_player.fps = 0;
 	_player.jumpPower = JUMPPOWER;
@@ -39,6 +39,7 @@ void player::update()
 	_player.fps++;
 	inputKey();
 	move();
+	pixelCollision();
 	if (_player.isJump) _player.jumpPower -= GRAVITY;
 }
 
@@ -49,13 +50,6 @@ void player::render()
 	if (_player.imgName == "정지")
 	{
 		if (_player.fps % 8 == 0)
-		{
-			_player.img->setFrameX(_player.img->getFrameX() + 1);
-		}
-	}
-	else if (_player.imgName == "공격1" || _player.imgName == "공격2" || _player.imgName == "공격3")
-	{
-		if (_player.fps % 3 == 0)
 		{
 			_player.img->setFrameX(_player.img->getFrameX() + 1);
 		}
@@ -71,9 +65,9 @@ void player::render()
 	{
 	case PLAYERSTATE_LEFT_IDLE: case PLAYERSTATE_RIGHT_IDLE:
 		if (_player.img->getFrameX() >= _player.img->getMaxFrameX())
-				_player.img->setFrameX(0);
+			_player.img->setFrameX(0);
 		break;
-	case PLAYERSTATE_LEFT_BRAKE: 
+	case PLAYERSTATE_LEFT_BRAKE:
 		if (_player.img->getFrameX() >= _player.img->getMaxFrameX())
 		{
 			_player.state = PLAYERSTATE_LEFT_IDLE;
@@ -139,6 +133,8 @@ void player::render()
 			if (_player.state == PLAYERSTATE_RIGHT_ROLL) _player.state = PLAYERSTATE_RIGHT_IDLE;
 		}
 		break;
+	case PLAYERSTATE_FALL:
+		break;
 		_player.fps = 0;
 	}
 }
@@ -164,8 +160,9 @@ void player::inputKey()
 		}
 	}
 
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !_player.isJump && (_player.state != PLAYERSTATE_LEFT_ATTACK1 && _player.state != PLAYERSTATE_LEFT_ATTACK2 && _player.state != PLAYERSTATE_LEFT_ATTACK3 &&
-		_player.state != PLAYERSTATE_RIGHT_ATTACK1 &&_player.state != PLAYERSTATE_RIGHT_ATTACK2 &&_player.state != PLAYERSTATE_RIGHT_ATTACK3))
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !_player.isJump && (_player.state != PLAYERSTATE_LEFT_ATTACK1 && _player.state != PLAYERSTATE_LEFT_ATTACK2 && 
+		_player.state != PLAYERSTATE_LEFT_ATTACK3 && _player.state != PLAYERSTATE_RIGHT_ATTACK1 &&_player.state != PLAYERSTATE_RIGHT_ATTACK2 &&
+		_player.state != PLAYERSTATE_RIGHT_ATTACK3))
 	{
 		_player.state = PLAYERSTATE_RIGHT_RUN;
 		_player.speed += 0.05f;
@@ -219,9 +216,12 @@ void player::inputKey()
 			_player.img->setFrameY(1);
 		}
 	}
+
 	if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && !_player.isJump2)
 	{
 		_player.isJump = true;
+		_player.jumpPower = JUMPPOWER;
+		_player.gravity = GRAVITY;
 		if (_player.state == PLAYERSTATE_LEFT_IDLE || _player.state == PLAYERSTATE_LEFT_BRAKE || _player.state == PLAYERSTATE_LEFT_RUN)
 		{
 			imageSet("점프", false);
@@ -231,19 +231,44 @@ void player::inputKey()
 			imageSet("점프", true);
 		}
 		_player.state = PLAYERSTATE_JUMP;
-		
 	}
+	if (_player.state == PLAYERSTATE_LEFT_CROUCH || _player.state == PLAYERSTATE_RIGHT_CROUCH)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+		{
+			_player.isJump = true;
+			_player.gravity = GRAVITY;
+			if (_player.state == PLAYERSTATE_LEFT_CROUCH)
+			{
+				imageSet("폴", false);
+			}
+			if (_player.state == PLAYERSTATE_RIGHT_CROUCH)
+			{
+				imageSet("폴", true);
+			}
+			_player.state = PLAYERSTATE_DOWN_JUMP;
+		}
+	}
+
 	if (_player.state == PLAYERSTATE_JUMP)
 	{
 		if (_player.jumpPower < 0)
 		{
 			_player.state = PLAYERSTATE_FALL;
-			imageSet("폴", true);
+			if (_player.img->getFrameY() == 1)
+			{
+				imageSet("폴", false);
+			}
+			else if (_player.img->getFrameY() == 0)
+			{
+				imageSet("폴", true);
+			}
 		}
 		if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 		{
 			_player.state = PLAYERSTATE_JUMP;
 			imageSet("점프", true);
+			_player.isJump2 = true;
 		}
 		if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 		{
@@ -397,6 +422,10 @@ void player::move()
 		_player.y -= _player.jumpPower;
 		_player.jumpPower -= _player.gravity;
 		break;
+	case PLAYERSTATE_DOWN_JUMP:
+		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		_player.y -= _player.gravity;
+		break;
 	case PLAYERSTATE_LEFT_ROLL:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		_player.x -= MAXSPEED * 2;
@@ -407,10 +436,10 @@ void player::move()
 		break;
 	case PLAYERSTATE_FALL:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-		_player.y -= _player.jumpPower;
+		if (_player.isJump) _player.y -= _player.jumpPower;
 		break;
 	case PLAYERSTATE_LEFT_CROUCH: case PLAYERSTATE_RIGHT_CROUCH:
-		_player.rc = RectMakeCenter(_player.x, _player.y + 13, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		_player.rc = RectMakeCenter(_player.x, _player.y + 14, _player.img->getFrameWidth(), _player.img->getFrameHeight());
 		break;
 	case PLAYERSTATE_LEFT_RISE: case PLAYERSTATE_RIGHT_RISE:
 		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
@@ -443,15 +472,41 @@ void player::move()
 	}
 }
 
-void player::jump(float* x, float* y, float power, float gravity)
-{
-	
-}
-
 void player::imageSet(char* imgName, bool direction)
 {
+	_player.fps = 0;
+	_player.imgName = imgName;
 	_player.img = IMAGEMANAGER->findImage(imgName);
 	_player.img->setFrameX(0);
 	if (direction) _player.img->setFrameY(0);
 	else if (!direction) _player.img->setFrameY(1);
+}
+
+void player::pixelCollision()
+{
+	switch (_player.state)
+	{
+	case PLAYERSTATE_JUMP:
+		break;
+	case PLAYERSTATE_FALL:
+		if (PIXELMANAGER->isPixelCollisionBottomY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("맵1-1픽셀")))
+		{
+			_player.isJump = false;
+			_player.isJump2 = false;
+			if (_player.img->getFrameY() == 0)
+			{
+				imageSet("정지", false);
+				_player.state = PLAYERSTATE_RIGHT_IDLE;
+			}
+			else if (_player.img->getFrameY() == 1)
+			{
+				imageSet("정지", true);
+				_player.state = PLAYERSTATE_LEFT_IDLE;
+			}
+		}
+		break;
+	case PLAYERSTATE_RIGHT_IDLE: case PLAYERSTATE_LEFT_IDLE: case PLAYERSTATE_LEFT_RUN: case PLAYERSTATE_RIGHT_RUN:
+		_player.y = PIXELMANAGER->getPixelCollisionY(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("맵1-1픽셀"));
+		break;
+	}
 }

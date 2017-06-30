@@ -22,6 +22,7 @@
 #include "sceneManager.h"
 #include "keyAniManager.h"
 #include "iniDataManager.h"
+#include "pixelCollisionManager.h"
 #include "utils.h"
 #include "collision.h"
 #include "txtData.h"
@@ -51,6 +52,7 @@ using namespace OMEGA_UTIL;
 #define SOUNDMANAGER soundManager::getSingleton()
 #define SCENEMANAGER sceneManager::getSingleton()
 #define KEYANIMANAGER keyAniManager::getSingleton()
+#define PIXELMANAGER pixelCollisionManager::getSingleton()
 #define TXTDATA txtData::getSingleton()
 #define INIDATA iniDataManager::getSingleton()
 #define DATABASE database::getSingleton()
