@@ -84,6 +84,7 @@ public:
 	BOOL getPlayerIsJump() { return _player.isJump; }
 	float getPlayerSpeed() { return _player.speed; }
 	float getPlayerJumpPower() { return _player.jumpPower; }
+	PLAYERSTATE getPlayerState() { return _player.state; }
 
 	player();
 	~player();

@@ -15,7 +15,8 @@ HRESULT gameScene::init()
 {
 	_player = new player;
 	_player->init();
-	_camX = _camY = 0;
+	_camX = 0;
+	_camY = 100;
 
 	return S_OK;
 }
@@ -28,11 +29,30 @@ void gameScene::release()
 void gameScene::update() 
 {
 	_player->update();
+	//플레이어 위치는 맵의 중심보다 조금 뒤에 있게
+	if (_player->getPlayerCenter().x - 350 > _camX)
+		if (_camX < 510)
+		{
+			//구를땐 카메라 빠르게
+			if (_player->getPlayerState() == PLAYERSTATE_LEFT_ROLL ||
+				_player->getPlayerState() == PLAYERSTATE_RIGHT_ROLL)
+			{
+				_camX += ROLLSPEED;
+			}
+			//다른때는 일반속도로 
+			else _camX += _player->getPlayerSpeed();
+		}
 
-	if (_player->getPlayerCenter().x - _camX > WINSIZEX / 2) _camX += _player->getPlayerSpeed();
-	if (_player->getPlayerCenter().x - _camX < WINSIZEX / 2) _camX -= _player->getPlayerSpeed();
-	if (_player->getPlayerCenter().y - _camY < WINSIZEY / 2) _camY -= 3.0f;
-	if (_player->getPlayerCenter().y - _camY > WINSIZEY / 2) _camY += 3.0f;
+	if (_player->getPlayerCenter().x - 350 < _camX)
+		if (_camX > 0)
+		{
+			if (_player->getPlayerState() == PLAYERSTATE_LEFT_ROLL ||
+				_player->getPlayerState() == PLAYERSTATE_RIGHT_ROLL)
+			{
+				_camX -= ROLLSPEED;
+			}
+			else _camX -= _player->getPlayerSpeed();
+		}
 }
 
 void gameScene::render() 
