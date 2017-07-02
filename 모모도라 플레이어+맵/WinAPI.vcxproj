@@ -104,10 +104,13 @@
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mainGame.h" />
+<<<<<<< HEAD:모모도라 플레이어+맵/WinAPI.vcxproj
     <ClInclude Include="map1_1.h" />
     <ClInclude Include="map1_2.h" />
     <ClInclude Include="map1_3.h" />
     <ClInclude Include="map1_boss.h" />
+=======
+>>>>>>> 26e3ede34cfd9cf7d2ca3e51f64978aac01852d3:모모도라/WinAPI.vcxproj
     <ClInclude Include="opening.h" />
     <ClInclude Include="pixelCollisionManager.h" />
     <ClInclude Include="player.h" />
@@ -151,10 +154,13 @@
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mainGame.cpp" />
+<<<<<<< HEAD:모모도라 플레이어+맵/WinAPI.vcxproj
     <ClCompile Include="map1_1.cpp" />
     <ClCompile Include="map1_2.cpp" />
     <ClCompile Include="map1_3.cpp" />
     <ClCompile Include="map1_boss.cpp" />
+=======
+>>>>>>> 26e3ede34cfd9cf7d2ca3e51f64978aac01852d3:모모도라/WinAPI.vcxproj
     <ClCompile Include="opening.cpp" />
     <ClCompile Include="pixelCollisionManager.cpp" />
     <ClCompile Include="player.cpp" />

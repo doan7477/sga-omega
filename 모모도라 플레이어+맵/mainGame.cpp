@@ -17,10 +17,14 @@ HRESULT mainGame::init(void)
 	gameNode::init(true);
 
 	SCENEMANAGER->addScene("·Îµù¾À", new loadingScene);
+<<<<<<< HEAD:ëª¨ëª¨ë„ë¼ í”Œë ˆì´ì–´+ë§µ/mainGame.cpp
 	SCENEMANAGER->addScene("¸Ê1", new map1_1);
 	SCENEMANAGER->addScene("¸Ê2", new map1_2);
 	SCENEMANAGER->addScene("¸Ê3", new map1_3);
 	SCENEMANAGER->addScene("º¸½º·ë", new map1_boss);
+=======
+	SCENEMANAGER->addScene("°ÔÀÓ¾À", new gameScene);
+>>>>>>> 26e3ede34cfd9cf7d2ca3e51f64978aac01852d3:ëª¨ëª¨ë„ë¼/mainGame.cpp
 	SCENEMANAGER->addScene("¿ÀÇÁ´×", new opening);
 
 	SCENEMANAGER->changeScene("¿ÀÇÁ´×");

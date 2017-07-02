@@ -101,6 +101,7 @@ public:
 	arrow* getPlayerArrow() { return _player.arrow; }
 	float getPlayerSpeed() { return _player.speed; }
 	float getPlayerJumpPower() { return _player.jumpPower; }
+<<<<<<< HEAD:모모도라 플레이어+맵/player.h
 	char* getPlayerImageName() { return _player.imgName; }
 
 	void setPlayerCenterX(float x) { _player.x = x; }
@@ -110,6 +111,9 @@ public:
 	void setPlayerImageName(char* NAME) { _player.imgName = NAME; }
 	void setPlayerImage(image* NAME) { _player.img = NAME; }
 
+=======
+	PLAYERSTATE getPlayerState() { return _player.state; }
+>>>>>>> 26e3ede34cfd9cf7d2ca3e51f64978aac01852d3:모모도라/player.h
 
 	player();
 	~player();
