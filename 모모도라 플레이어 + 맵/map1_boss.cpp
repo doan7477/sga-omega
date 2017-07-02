@@ -23,7 +23,7 @@ HRESULT map1_boss::init()
 	_camX = atoi(vStr[2].c_str());
 	_player->setPlayerState((PLAYERSTATE)atoi(vStr[4].c_str()));
 	_player->setPlayerSpeed(atoi(vStr[5].c_str()));
-	_player->imageSet((char*)atoi(vStr[6].c_str()), true);
+	_player->imageSet((char*)atoi(vStr[6].c_str()), (atoi(vStr[4].c_str())) % 2);
 
 	_camX2 = _camX3 = 0;
 	_camY = 10;

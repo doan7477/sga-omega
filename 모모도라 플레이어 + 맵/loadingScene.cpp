@@ -38,13 +38,13 @@ void loadingScene::update()
 		//로딩이 끝난후 플레이어와 카메라 좌표
 		char temp[128];
 		vector<string> vStr;
-		vStr.push_back(itoa(200, temp, 10));
-		vStr.push_back(itoa(600, temp, 10));
-		vStr.push_back(itoa(0, temp, 10));
-		vStr.push_back(itoa(0, temp, 10));
-		vStr.push_back(itoa(1, temp, 10));
-		vStr.push_back(itoa(0, temp, 10));
-
+		vStr.push_back(itoa(200, temp, 10));			//playerX
+		vStr.push_back(itoa(600, temp, 10));			//playerY
+		vStr.push_back(itoa(0, temp, 10));				//cameraX
+		vStr.push_back(itoa(0, temp, 10));				//cameraY
+		vStr.push_back(itoa(1, temp, 10));				//playerState
+		vStr.push_back(itoa(0, temp, 10));				//playerSpeed
+		vStr.push_back(itoa((int)"정지", temp, 10));		//playerimage
 
 		TXTDATA->txtSave("PlayerPosition.txt", vStr);
 
