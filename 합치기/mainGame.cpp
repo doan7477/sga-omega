@@ -20,6 +20,7 @@ HRESULT mainGame::init(void)
 	SCENEMANAGER->addScene("¸Ê1", new map1_1);
 	SCENEMANAGER->addScene("¸Ê2", new map1_2);
 	SCENEMANAGER->addScene("¸Ê3", new map1_3);
+	SCENEMANAGER->addScene("¸Ê4", new map1_4);
 	SCENEMANAGER->addScene("º¸½º·ë", new map1_boss);
 	SCENEMANAGER->addScene("¿ÀÇÁ´×", new opening);
 

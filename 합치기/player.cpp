@@ -69,7 +69,7 @@ void player::update()
 	_player.fps++;
 	inputKey();
 	move();
-	pixelCollision();
+	//pixelCollision();
 }
 
 void player::showInven()
@@ -583,12 +583,14 @@ void player::move()
 	case PLAYERSTATE_LEFT_RUN:
 		_player.isRight = false;
 		_player.isGround = true;
-		if (!PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.rc.bottom - 10, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")) &&
-			_player.x > 10)
-		{
-			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-			_player.x -= _player.speed;
-		}
+		//if (!PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.rc.bottom - 10, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")) &&
+		//	_player.x > 10)
+		//{
+		//	_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		//	_player.x -= _player.speed;
+		//}
+		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		_player.x -= _player.speed;
 		break;
 	case PLAYERSTATE_RIGHT_RUN:
 		_player.isGround = true;
@@ -602,10 +604,12 @@ void player::move()
 	case PLAYERSTATE_LEFT_BRAKE:
 		_player.isRight = false;
 		if (!PIXELMANAGER->isPixelCollisionLeftX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")) && _player.x > 10)
-		{
-			_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
-			_player.x -= _player.speed / 5;
-		}
+		//{
+		//	_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		//	_player.x -= _player.speed / 5;
+		//}
+		_player.rc = RectMakeCenter(_player.x, _player.y, _player.img->getFrameWidth(), _player.img->getFrameHeight());
+		_player.x -= _player.speed / 5;
 		break;
 	case PLAYERSTATE_RIGHT_BRAKE:
 		if (!PIXELMANAGER->isPixelCollisionRightX(_player.img, _player.x, _player.y, IMAGEMANAGER->findImage("¸Ê1-1ÇÈ¼¿")))

@@ -34,7 +34,8 @@ HRESULT map1_1::init()
 	_camX = atoi(vStr[2].c_str());
 	_player->setPlayerState((PLAYERSTATE)atoi(vStr[4].c_str()));
 	_player->setPlayerSpeed(atoi(vStr[5].c_str()));
-	//_player->imageSet((char*)atoi(vStr[6].c_str()), true);
+	_player->imageSet((char*)atoi(vStr[6].c_str()), (atoi(vStr[4].c_str())) % 2);
+	_player->setPlayerImageFrameX(atoi(vStr[7].c_str()));
 
 	_camX2 = _camX3 = 0;
 	_camY = 100;
@@ -135,7 +136,6 @@ void map1_1::mapMove()
 	switch (_state)
 	{
 	case RIGHT_ESCAPE:
-
 		vStr.push_back(itoa(10, temp, 10));
 		vStr.push_back(itoa(600, temp, 10));
 		vStr.push_back(itoa(0, temp, 10));
@@ -143,6 +143,7 @@ void map1_1::mapMove()
 		vStr.push_back(itoa(_player->getPlayerState(), temp, 10));
 		vStr.push_back(itoa(_player->getPlayerSpeed(), temp, 10));
 		vStr.push_back(itoa((int)_player->getPlayerImageName(), temp, 10));
+		vStr.push_back(itoa(_player->getPlayerImage()->getFrameX(), temp, 10));
 
 		TXTDATA->txtSave("PlayerPosition.txt", vStr);
 

@@ -93,7 +93,6 @@
     <ClInclude Include="frameImage.h" />
     <ClInclude Include="frameImageManager.h" />
     <ClInclude Include="gameNode.h" />
-    <ClInclude Include="gameScene.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="Imp.h" />
@@ -109,21 +108,26 @@
     <ClInclude Include="map1_1.h" />
     <ClInclude Include="map1_2.h" />
     <ClInclude Include="map1_3.h" />
+    <ClInclude Include="map1_4.h" />
     <ClInclude Include="map1_boss.h" />
     <ClInclude Include="opening.h" />
     <ClInclude Include="pixelCollisionManager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="progressBar.h" />
+    <ClInclude Include="puzzleBall.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="saveBell.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="shop.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="structure.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="tree.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
@@ -142,7 +146,6 @@
     <ClCompile Include="frameImage.cpp" />
     <ClCompile Include="frameImageManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
-    <ClCompile Include="gameScene.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="Imp.cpp" />
@@ -158,11 +161,14 @@
     <ClCompile Include="map1_1.cpp" />
     <ClCompile Include="map1_2.cpp" />
     <ClCompile Include="map1_3.cpp" />
+    <ClCompile Include="map1_4.cpp" />
     <ClCompile Include="map1_boss.cpp" />
     <ClCompile Include="opening.cpp" />
     <ClCompile Include="pixelCollisionManager.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="progressBar.cpp" />
+    <ClCompile Include="puzzleBall.cpp" />
+    <ClCompile Include="saveBell.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="shop.cpp" />
     <ClCompile Include="soundManager.cpp" />
@@ -170,8 +176,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="structure.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="tree.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />

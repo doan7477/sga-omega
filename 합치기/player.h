@@ -112,6 +112,7 @@ public:
 	float getPlayerJumpPower() { return _player.jumpPower; }
 	char* getPlayerImageName() { return _player.imgName; }
 	RECT getPlayerRect(void) { return _player.rc; }
+	image* getPlayerImage() { return _player.img; }
 
 	void setPlayerCenterX(float x) { _player.x = x; }
 	void setPlayerCenterY(float y) { _player.y = y; }
@@ -119,6 +120,7 @@ public:
 	void setPlayerSpeed(float speed) { _player.speed = speed; }
 	void setPlayerImageName(char* NAME) { _player.imgName = NAME; }
 	void setPlayerImage(image* NAME) { _player.img = NAME; }
+	void setPlayerImageFrameX(int num) { _player.img->setFrameX(num); }
 
 	//인벤토리와 연결
 	void setInventoryMemoryAddressLink(inventory* inven) { _player.inven = inven; }
@@ -126,6 +128,8 @@ public:
 	void setShopMemoryAddressLink(shop* shop) { _player.shop = shop; }
 
 	void setInShop(bool inShop) { _player.inShop = inShop; }
+
+
 
 	player();
 	~player();

@@ -38,17 +38,21 @@ void loadingScene::update()
 		//로딩이 끝난후 플레이어와 카메라 좌표
 		char temp[128];
 		vector<string> vStr;
-		vStr.push_back(itoa(200, temp, 10));
-		vStr.push_back(itoa(600, temp, 10));
-		vStr.push_back(itoa(0, temp, 10));
-		vStr.push_back(itoa(0, temp, 10));
-		vStr.push_back(itoa(1, temp, 10));
-		vStr.push_back(itoa(0, temp, 10));
+		vStr.push_back(itoa(200, temp, 10));			//playerX
+		vStr.push_back(itoa(600, temp, 10));			//playerY
+		vStr.push_back(itoa(0, temp, 10));				//cameraX
+		vStr.push_back(itoa(0, temp, 10));				//cameraY
+		vStr.push_back(itoa(1, temp, 10));				//playerState
+		vStr.push_back(itoa(0, temp, 10));				//playerSpeed
+		vStr.push_back(itoa((int)"정지", temp, 10));		//playerimage
+		vStr.push_back(itoa(0, temp, 10));				//playerimageFrameX
+		//vStr.push_back(itoa(0, temp, 10));				//getBerry
+		//vStr.push_back(itoa(0, temp, 10));				//puzzle done
 
 
 		TXTDATA->txtSave("PlayerPosition.txt", vStr);
 
-		SCENEMANAGER->changeScene("맵1");
+		SCENEMANAGER->changeScene("보스룸");
 	}
 }
 
@@ -69,6 +73,7 @@ void loadingScene::loadingImage()
 	_loading->loadImage("맵1-2픽셀", "image/background/map1-2_pixel.bmp", 2959, 734, true, RGB(255, 0, 255));
 	_loading->loadImage("맵1-3", "image/background/map 1-3.bmp", 1956, 734, true, RGB(255, 0, 255));
 	_loading->loadImage("맵1-3픽셀", "image/background/map1-3_pixel.bmp", 1956, 734, true, RGB(255, 0, 255));
+	_loading->loadImage("맵1-4", "image/background/map 1-4.bmp", 1407, 717, true, RGB(255, 0, 255));
 	_loading->loadImage("맵1-boss", "image/background/map 1-boss.bmp", 1947, 734, true, RGB(255, 0, 255));
 	_loading->loadImage("맵1-boss픽셀", "image/background/map1-boss_pixel.bmp", 1947, 734, true, RGB(255, 0, 255));
 
@@ -105,6 +110,14 @@ void loadingScene::loadingImage()
 
 	//아이템 및 상점 이미지 로드
 
+	//구조물 관련 이미지
+	_loading->loadFrameImage("세이브종", "image/background/bell.bmp", 410, 288, 5, 3, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("퍼즐구슬", "image/background/beed.bmp", 225, 96, 5, 2, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("퍼즐반짝이", "image/background/beedEffect.bmp", 0, 0, 1254, 116, 11, 1, true, RGB(255, 0, 255));
+	_loading->loadFrameImage("나무", "image/background/tree.bmp", 174, 123, 2, 1, true, RGB(255, 0, 255));
+	_loading->loadImage("바위", "image/background/rock.bmp", 144, 144);
+	_loading->loadImage("조사하기", "image/background/조사하기.bmp", 226, 48, true, RGB(255, 0, 255));
+	_loading->loadImage("기도하기", "image/background/기도하기.bmp", 226, 48, true, RGB(255, 0, 255));
 
 	//적 이미지 로드
 	_loading->loadFrameImage("폭탄병스탠딩", "image/김기준/Idle.bmp", 54, 138, 1, 2, true, RGB(255, 0, 255));

@@ -4,6 +4,7 @@
 #include "map1_1.h"
 #include "map1_2.h"
 #include "map1_3.h"
+#include "map1_4.h"
 #include "map1_boss.h"
 #include "opening.h"
 

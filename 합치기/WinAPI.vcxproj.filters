@@ -85,6 +85,9 @@
     <Filter Include="MainGame\item">
       <UniqueIdentifier>{191e0baa-b808-40ad-84b5-16d0b896ae80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\stuct">
+      <UniqueIdentifier>{f5407a66-6723-4d74-b704-e886c45f9f7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -174,9 +177,6 @@
     <ClInclude Include="collision.h">
       <Filter>2DGameFramework\UTIL</Filter>
     </ClInclude>
-    <ClInclude Include="gameScene.h">
-      <Filter>MainGame\gameScene</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
       <Filter>MainGame\player</Filter>
     </ClInclude>
@@ -233,6 +233,21 @@
     </ClInclude>
     <ClInclude Include="ImpBoss.h">
       <Filter>MainGame\enemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="map1_4.h">
+      <Filter>MainGame\gameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>MainGame\stuct</Filter>
+    </ClInclude>
+    <ClInclude Include="structure.h">
+      <Filter>MainGame\stuct</Filter>
+    </ClInclude>
+    <ClInclude Include="saveBell.h">
+      <Filter>MainGame\stuct</Filter>
+    </ClInclude>
+    <ClInclude Include="puzzleBall.h">
+      <Filter>MainGame\stuct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +323,6 @@
     <ClCompile Include="collision.cpp">
       <Filter>2DGameFramework\UTIL</Filter>
     </ClCompile>
-    <ClCompile Include="gameScene.cpp">
-      <Filter>MainGame\gameScene</Filter>
-    </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>MainGame\player</Filter>
     </ClCompile>
@@ -367,6 +379,21 @@
     </ClCompile>
     <ClCompile Include="ImpBoss.cpp">
       <Filter>MainGame\enemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="map1_4.cpp">
+      <Filter>MainGame\gameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.cpp">
+      <Filter>MainGame\stuct</Filter>
+    </ClCompile>
+    <ClCompile Include="structure.cpp">
+      <Filter>MainGame\stuct</Filter>
+    </ClCompile>
+    <ClCompile Include="saveBell.cpp">
+      <Filter>MainGame\stuct</Filter>
+    </ClCompile>
+    <ClCompile Include="puzzleBall.cpp">
+      <Filter>MainGame\stuct</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
